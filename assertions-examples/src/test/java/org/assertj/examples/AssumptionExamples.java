@@ -32,15 +32,19 @@ public class AssumptionExamples extends AbstractAssertionsExamples {
 
   @AfterClass
   public static void afterClass() {
-    assertThat(ranTests).as("number of tests run").isEqualTo(2);
+    assertThat(ranTests)
+        .as("number of tests run")
+        .isEqualTo(2);
   }
 
   @Test
   public void when_assumption_is_not_met_the_test_should_be_ignored() {
     // since this assumption is obviously false ...
-    assumeThat(frodo.getRace()).isEqualTo(ORC);
+    assumeThat(frodo.getRace())
+        .isEqualTo(ORC);
     // ... this assertion should not be performed.
-    assertThat(fellowshipOfTheRing).contains(sauron);
+    assertThat(fellowshipOfTheRing)
+        .contains(sauron);
     fail("should not arrive here");
   }
 
@@ -48,16 +52,19 @@ public class AssumptionExamples extends AbstractAssertionsExamples {
   public void given_assumption_is_not_met_the_test_should_be_ignored() {
     // BDD style assumptions
     // since this assumption is obviously false ...
-    given(frodo.getRace()).isEqualTo(ORC);
+    given(frodo.getRace())
+        .isEqualTo(ORC);
     // ... this assertion should not be performed.
-    assertThat(fellowshipOfTheRing).contains(sauron);
+    assertThat(fellowshipOfTheRing)
+        .contains(sauron);
     fail("should not arrive here");
   }
 
   @Test
   public void when_string_comparable_assumption_is_not_met_the_test_should_be_ignored() {
     // since this assumption is obviously false ...
-    assumeThat(frodo.getName()).isGreaterThan("Gandalf");
+    assumeThat(frodo.getName())
+        .isGreaterThan("Gandalf");
     // ... this assertion should not be performed.
     assertThat(fellowshipOfTheRing).contains(sauron);
     fail("should not arrive here");
@@ -75,8 +82,9 @@ public class AssumptionExamples extends AbstractAssertionsExamples {
   @Test
   public void when_all_assumptions_are_met_the_test_should_be_run() {
     // since this assumption is true ...
-    assumeThat(frodo.getRace()).isEqualTo(HOBBIT)
-                               .isNotEqualTo(ORC);
+    assumeThat(frodo.getRace())
+        .isEqualTo(HOBBIT)
+        .isNotEqualTo(ORC);
     // ... this assertion should be performed.
     assertThat(fellowshipOfTheRing).doesNotContain(sauron);
     ranTests++;
@@ -85,8 +93,9 @@ public class AssumptionExamples extends AbstractAssertionsExamples {
   @Test
   public void can_use_extracting_feature_in_assumptions() {
     // since this assumption is obviously false ...
-    assumeThat(fellowshipOfTheRing).extracting("race")
-                                   .contains(ORC);
+    assumeThat(fellowshipOfTheRing)
+        .extracting("race")
+        .contains(ORC);
     // ... this assertion should not be performed.
     assertThat(fellowshipOfTheRing).contains(sauron);
     fail("should not arrive here");
@@ -95,7 +104,8 @@ public class AssumptionExamples extends AbstractAssertionsExamples {
   @Test
   public void assumeThatCode_assumption_not_met_example() {
     // since this assumption is obviously false ...
-    assumeThatCode(() -> fellowshipOfTheRing.get(1000)).doesNotThrowAnyException();
+    assumeThatCode(() -> fellowshipOfTheRing.get(1000))
+        .doesNotThrowAnyException();
     // ... this assertion should not be performed.
     assertThat(fellowshipOfTheRing).contains(sauron);
     fail("should not arrive here");
@@ -104,7 +114,8 @@ public class AssumptionExamples extends AbstractAssertionsExamples {
   @Test
   public void assumeThatCode_assumption_met_example() {
     // since the given code throws an ArrayIndexOutOfBoundsException ...
-    assumeThatCode(() -> fellowshipOfTheRing.get(1000)).isInstanceOf(IndexOutOfBoundsException.class);
+    assumeThatCode(() -> fellowshipOfTheRing.get(1000))
+        .isInstanceOf(IndexOutOfBoundsException.class);
     // ... this assertion should be performed.
     assertThat(fellowshipOfTheRing).contains(frodo);
   }
@@ -114,7 +125,7 @@ public class AssumptionExamples extends AbstractAssertionsExamples {
     // since one of the assumptions is obviously false ...
     assumeThat(frodo.getRace()).isEqualTo(HOBBIT);
     assumeThat(fellowshipOfTheRing).extracting("race")
-                                   .contains(ORC);
+        .contains(ORC);
     // ... this assertion should not be performed.
     assertThat(fellowshipOfTheRing).contains(sauron);
     fail("should not arrive here");
@@ -122,14 +133,15 @@ public class AssumptionExamples extends AbstractAssertionsExamples {
 
   @Test
   public void assumptions_still_work_when_switching_the_object_under_test() {
-    assumeThat(fellowshipOfTheRing).size()
-                                   .isLessThan(100)
-                                   .returnToIterable()
-                                   .filteredOn("race", HOBBIT)
-                                   .containsOnly(sam, frodo, pippin, merry)
-                                   .extracting(TolkienCharacter::getName)
-                                   .contains("Frodo")
-                                   .contains("Elrond"); // fail
+    assumeThat(fellowshipOfTheRing)
+        .size()
+        .isLessThan(100)
+        .returnToIterable()
+        .filteredOn("race", HOBBIT)
+        .containsOnly(sam, frodo, pippin, merry)
+        .extracting(TolkienCharacter::getName)
+        .contains("Frodo")
+        .contains("Elrond"); // fail
     fail("should not arrive here");
   }
 

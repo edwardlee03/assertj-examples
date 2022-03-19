@@ -137,8 +137,11 @@ public abstract class AbstractAssertionsExamples {
   protected static PotentialMvpCondition potentialMvp;
   protected static Condition<BasketBallPlayer> doubleDoubleStats;
 
+  /**
+   * 设置只运行一次。
+   */
   @BeforeAll
-  public static void setUpOnce() {
+  public static void setupOnce() {
     rose = new BasketBallPlayer(new Name("Derrick", "Rose"), "Cavs");
     rose.setAssistsPerGame(8);
     rose.setPointsPerGame(25);

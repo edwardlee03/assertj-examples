@@ -37,20 +37,26 @@ public class AssertionsWithCustomComparatorExamples extends AbstractAssertionsEx
   public void string_assertions_with_custom_comparison_examples() {
 
     // standard assertion based on equals() comparison strategy
-    assertThat("Frodo").startsWith("Fro").endsWith("do");
+    assertThat("Frodo")
+        .startsWith("Fro").endsWith("do");
 
     // now let's use a specific comparison strategy that is case iNsenSiTIve :o)
     // We see that assertions succeeds even though case is not the same (that's the point)
-    assertThat("Frodo").usingComparator(caseInsensitiveStringComparator).startsWith("fr").endsWith("ODO");
+    assertThat("Frodo")
+        .usingComparator(caseInsensitiveStringComparator)
+        .startsWith("fr").endsWith("ODO");
 
     // All assertions called after usingComparator(caseInsensitiveStringComparator) are based on the given comparator
     // ...
-    assertThat("Frodo").usingComparator(caseInsensitiveStringComparator).contains("fro").doesNotContain("don");
+    assertThat("Frodo")
+        .usingComparator(caseInsensitiveStringComparator)
+        .contains("fro").doesNotContain("don");
     // ... but a new assertion is not
     // assertThat("Frodo").startsWith("fr").endsWith("ODO"); // FAILS !!!
 
     // usingComparator is honored for Comparable assertions
-    assertThat("abc").usingComparator(caseInsensitiveStringComparator)
+    assertThat("abc")
+        .usingComparator(caseInsensitiveStringComparator)
                      .isLessThanOrEqualTo("ABC")
                      .usingDefaultComparator()
                      .isGreaterThan("ABC");

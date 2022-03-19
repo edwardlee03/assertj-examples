@@ -56,4 +56,5 @@ public class AssertDelegateTargetExample {
     button.setBlinking(true);
     assertThat(buttonAssert).isBlinking(); // same as : buttonAssert.isBlinking();
   }
+
 }
