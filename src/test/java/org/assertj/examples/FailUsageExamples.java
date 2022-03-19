@@ -18,6 +18,7 @@ import org.junit.Test;
 
 /**
  * Fail usage examples.
+ * 失败使用的断言示例。
  * 
  * @author Joel Costigliola
  */
@@ -35,7 +36,8 @@ public class FailUsageExamples extends AbstractAssertionsExamples {
       // if IndexOutOfBoundsException was not thrown, test would fail the specified message 
       fail("IndexOutOfBoundsException expected because fellowshipOfTheRing has only 9 elements");
     } catch (IndexOutOfBoundsException e) {
-      assertThat(e).hasMessage("Index: 9, Size: 9");
+      assertThat(e)
+          .hasMessage("Index: 9, Size: 9");
     }
 
     // Warning : don't catch Throwable in catch clause as it would also catch AssertionError thrown by fail method
@@ -47,7 +49,9 @@ public class FailUsageExamples extends AbstractAssertionsExamples {
       // "Expected IndexOutOfBoundsException to be thrown"
       failBecauseExceptionWasNotThrown(IndexOutOfBoundsException.class);
     } catch (IndexOutOfBoundsException e) {
-      assertThat(e).hasMessage("Index: 9, Size: 9");
+      assertThat(e)
+          .hasMessage("Index: 9, Size: 9");
     }
   }
+
 }
