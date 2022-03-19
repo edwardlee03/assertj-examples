@@ -27,12 +27,14 @@ public class CustomSoftAssertionsLineNumberTest {
   // @Disabled
   public void should_print_line_numbers_of_failed_assertions_even_if_custom_assertion_in_non_assertj_package() {
     MyProjectSoftAssertions softly = new MyProjectSoftAssertions();
-    softly.assertThat(new MyProjectClass("v1")).hasValue("v2");
+    softly.assertThat(new MyProjectClass("v1"))
+        .hasValue("v2");
     softly.assertAll();
     try {
       fail("Should not reach here");
     } catch (AssertionError e) {
-      assertThat(e.getMessage()).contains(format("at CustomSoftAssertionsLineNumberTest.should_print_line_numbers_of_failed_assertions_even_if_custom_assertion_in_non_assertj_package(CustomSoftAssertionsLineNumberTest.java:31)"));
+      assertThat(e.getMessage())
+          .contains(format("at CustomSoftAssertionsLineNumberTest.should_print_line_numbers_of_failed_assertions_even_if_custom_assertion_in_non_assertj_package(CustomSoftAssertionsLineNumberTest.java:31)"));
     }
   }
 

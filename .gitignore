@@ -1,8 +1,16 @@
+
+# Maven
 /target
+
+# Eclipse
 /.settings
 /.classpath
 /.project
-.DS_Store
-.idea
+
+# IDEA
+.idea/
 /*.iml
+
 .java-version
+
+.DS_Store

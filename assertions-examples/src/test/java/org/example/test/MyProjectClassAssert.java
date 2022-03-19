@@ -24,7 +24,8 @@ public class MyProjectClassAssert extends AbstractAssert<MyProjectClassAssert, M
 
   public MyProjectClassAssert hasValue(Object value) {
     if (!Objects.equals(actual.getValue(), value)) {
-      failWithMessage("Expecting value to be <%s> but was <%s>:", value, actual.getValue());
+      failWithMessage("Expecting value to be <%s> but was <%s>:",
+          value, actual.getValue());
     }
     return this;
   }
