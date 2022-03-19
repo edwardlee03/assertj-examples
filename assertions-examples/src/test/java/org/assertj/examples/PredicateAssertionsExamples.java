@@ -25,44 +25,52 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.assertj.examples.data.TolkienCharacter;
 import org.junit.jupiter.api.Test;
 
+/**
+ * 谓词的断言示例。
+ */
 public class PredicateAssertionsExamples extends AbstractAssertionsExamples {
 
   @Test
   public void predicate_assertions_examples() {
     Predicate<TolkienCharacter> hobbitPredicate = character -> character.getRace() == HOBBIT;
 
-    assertThat(hobbitPredicate).accepts(frodo)
-                               .accepts(frodo, sam, pippin)
-                               .rejects(sauron)
-                               .rejects(sauron, aragorn)
-                               .acceptsAll(newArrayList(frodo, sam, pippin))
-                               .rejectsAll(newArrayList(sauron, gandalf, aragorn));
+    assertThat(hobbitPredicate)
+        .accepts(frodo)
+        .accepts(frodo, sam, pippin)
+        .rejects(sauron)
+        .rejects(sauron, aragorn)
+        .acceptsAll(newArrayList(frodo, sam, pippin))
+        .rejectsAll(newArrayList(sauron, gandalf, aragorn));
 
     Predicate<String> ballSportPredicate = sport -> sport.contains("ball");
 
     // assertion succeeds:
-    assertThat(ballSportPredicate).accepts("football")
-                                  .accepts("football", "basketball", "handball");
+    assertThat(ballSportPredicate)
+        .accepts("football")
+        .accepts("football", "basketball", "handball");
   }
 
   @Test
   public void primitives_predicate_assertions_examples() {
     IntPredicate evenNumber = n -> n % 2 == 0;
 
-    assertThat(evenNumber).accepts(4)
-                          .rejects(3)
-                          .accepts(2, 4, 6)
-                          .rejects(1, 3, 5);
+    assertThat(evenNumber)
+        .accepts(4)
+        .rejects(3)
+        .accepts(2, 4, 6)
+        .rejects(1, 3, 5);
 
     DoublePredicate tallSize = size -> size > 1.90;
-    assertThat(tallSize).accepts(1.95, 2.00, 2.05);
+    assertThat(tallSize)
+        .accepts(1.95, 2.00, 2.05);
   }
 
   @Test
   public void should_not_produce_warning_for_varargs_parameter() {
     Predicate<Map.Entry<String, String>> predicate = entry -> entry.getKey().equals("A");
-    assertThat(predicate).accepts(Pair.of("A", "B"))
-                         .rejects(Pair.of("C", "D"));
+    assertThat(predicate)
+        .accepts(Pair.of("A", "B"))
+        .rejects(Pair.of("C", "D"));
   }
 
 }
