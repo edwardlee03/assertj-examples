@@ -1,13 +1,13 @@
 /**
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
- *
+ * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
- *
+ * <p>
  * Copyright 2012-2016 the original author or authors.
  */
 package org.assertj.examples;
@@ -37,6 +37,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Path assertions usage examples.
+ * 文件路径的断言示例。
  *
  * @author Joel Costigliola
  */
@@ -62,14 +63,16 @@ public class PathAssertionsExamples extends AbstractAssertionsExamples {
   public void path_content_assertions_examples() throws Exception {
 
     write(xFile, "".getBytes());
-    assertThat(xFile).isEmptyFile();
+    assertThat(xFile)
+        .isEmptyFile();
 
     // check paths content
 
     write(xFile, "The Truth Is Out There".getBytes());
     // The default charset is used
-    assertThat(xFile).isNotEmptyFile()
-                     .hasContent("The Truth Is Out There");
+    assertThat(xFile)
+        .isNotEmptyFile()
+        .hasContent("The Truth Is Out There");
 
     try {
       assertThat(xFile).hasContent("La Vérité Est Ailleurs");
@@ -144,19 +147,20 @@ public class PathAssertionsExamples extends AbstractAssertionsExamples {
 
     Files.setPosixFilePermissions(rwxFile, perms);
 
-    final Path symlinkToRwxFile = FileSystems.getDefault().getPath("symlink-to-rwxFile");
+    final Path symlinkToRwxFile = FileSystems.getDefault()
+        .getPath("symlink-to-rwxFile");
     if (!Files.exists(symlinkToRwxFile)) {
       createSymbolicLink(symlinkToRwxFile, rwxFile);
     }
 
     // The following assertions succeed:
     assertThat(rwxFile).isReadable()
-                       .isWritable()
-                       .isExecutable();
+        .isWritable()
+        .isExecutable();
 
     assertThat(symlinkToRwxFile).isReadable()
-                                .isWritable()
-                                .isExecutable();
+        .isWritable()
+        .isExecutable();
   }
 
   @Test
@@ -202,9 +206,10 @@ public class PathAssertionsExamples extends AbstractAssertionsExamples {
 
     assertThat(dir).isDirectory();
     assertThat(dirSymlink).isDirectory();
-    assertThat(dir).hasParent(Paths.get("target"))
-                   .hasParent(Paths.get("target/dir/..")) // would fail with hasParentRaw
-                   .hasParentRaw(Paths.get("target"));
+    assertThat(dir)
+        .hasParent(Paths.get("target"))
+        .hasParent(Paths.get("target/dir/..")) // would fail with hasParentRaw
+        .hasParentRaw(Paths.get("target"));
 
     assertThat(existingFile.toRealPath()).isCanonical();
 
@@ -218,14 +223,17 @@ public class PathAssertionsExamples extends AbstractAssertionsExamples {
     assertThat(Paths.get("../d")).isNormalized();
     assertThat(Paths.get("/")).hasNoParent();
     assertThat(Paths.get("foo")).hasNoParentRaw();
-    assertThat(Paths.get("/usr/lib")).startsWith(Paths.get("/usr"))
-                                     .startsWith(Paths.get("/usr/lib/..")) // would fail with startsWithRaw
-                                     .startsWithRaw(Paths.get("/usr"));
-    assertThat(Paths.get("/usr/lib")).endsWith(Paths.get("lib"))
-                                     .endsWith(Paths.get("lib/../lib")) // would fail with endsWithRaw
-                                     .endsWithRaw(Paths.get("lib"));
+    assertThat(Paths.get("/usr/lib"))
+        .startsWith(Paths.get("/usr"))
+        .startsWith(Paths.get("/usr/lib/..")) // would fail with startsWithRaw
+        .startsWithRaw(Paths.get("/usr"));
+    assertThat(Paths.get("/usr/lib"))
+        .endsWith(Paths.get("lib"))
+        .endsWith(Paths.get("lib/../lib")) // would fail with endsWithRaw
+        .endsWithRaw(Paths.get("lib"));
 
-    assertThat(Paths.get("abc.txt")).isLessThan(Paths.get("xyz.txt"));
+    assertThat(Paths.get("abc.txt"))
+        .isLessThan(Paths.get("xyz.txt"));
 
     // assertions error examples
 
@@ -267,31 +275,32 @@ public class PathAssertionsExamples extends AbstractAssertionsExamples {
   public void should_check_digests() throws Exception {
     // GIVEN
     Path tested = Paths.get("src/test/resources/assertj-core-2.9.0.jar");
-    byte[] md5Bytes = new byte[] { -36, -77, 1, 92, -46, -124, 71, 100, 76, -127, 10, -13, 82, -125, 44, 25 };
-    byte[] sha1Bytes = new byte[] { 92, 90, -28, 91, 88, -15, 32, 35, -127, 122, -66, 73, 36, 71, -51, -57, -111, 44,
-        26, 44 };
+    byte[] md5Bytes = new byte[]{-36, -77, 1, 92, -46, -124, 71, 100, 76, -127, 10, -13, 82, -125, 44, 25};
+    byte[] sha1Bytes = new byte[]{92, 90, -28, 91, 88, -15, 32, 35, -127, 122, -66, 73, 36, 71, -51, -57, -111, 44,
+        26, 44};
     // THEN
     assertThat(tested).hasDigest("SHA1", "5c5ae45b58f12023817abe492447cdc7912c1a2c")
-                      .hasDigest(MessageDigest.getInstance("SHA1"), "5c5ae45b58f12023817abe492447cdc7912c1a2c")
-                      .hasDigest("SHA1", sha1Bytes)
-                      .hasDigest(MessageDigest.getInstance("SHA1"), sha1Bytes)
-                      .hasDigest("MD5", "dcb3015cd28447644c810af352832c19")
-                      .hasDigest(MessageDigest.getInstance("MD5"), "dcb3015cd28447644c810af352832c19")
-                      .hasDigest("MD5", md5Bytes)
-                      .hasDigest(MessageDigest.getInstance("MD5"), md5Bytes);
+        .hasDigest(MessageDigest.getInstance("SHA1"), "5c5ae45b58f12023817abe492447cdc7912c1a2c")
+        .hasDigest("SHA1", sha1Bytes)
+        .hasDigest(MessageDigest.getInstance("SHA1"), sha1Bytes)
+        .hasDigest("MD5", "dcb3015cd28447644c810af352832c19")
+        .hasDigest(MessageDigest.getInstance("MD5"), "dcb3015cd28447644c810af352832c19")
+        .hasDigest("MD5", md5Bytes)
+        .hasDigest(MessageDigest.getInstance("MD5"), md5Bytes);
   }
 
   @Test
   public void directory_assertions() {
     Path directory = Paths.get("src/test/resources/templates");
-    assertThat(directory).isNotEmptyDirectory()
-                         .isDirectoryContaining("regex:.*txt")
-                         .isDirectoryContaining("glob:**my*")
-                         .isDirectoryContaining("glob:**.txt")
-                         .isDirectoryContaining(path -> path.getFileName().toString().contains("template"))
-                         .isDirectoryNotContaining("glob:**.java")
-                         .isDirectoryNotContaining("regex:.*java")
-                         .isDirectoryNotContaining(path -> path.getFileName().toString().endsWith("java"));
+    assertThat(directory)
+        .isNotEmptyDirectory()
+        .isDirectoryContaining("regex:.*txt")
+        .isDirectoryContaining("glob:**my*")
+        .isDirectoryContaining("glob:**.txt")
+        .isDirectoryContaining(path -> path.getFileName().toString().contains("template"))
+        .isDirectoryNotContaining("glob:**.java")
+        .isDirectoryNotContaining("regex:.*java")
+        .isDirectoryNotContaining(path -> path.getFileName().toString().endsWith("java"));
 
     Path emptyDirectory = Paths.get("src/test/resources/empty");
     assertThat(emptyDirectory).isEmptyDirectory();
