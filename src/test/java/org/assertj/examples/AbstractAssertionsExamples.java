@@ -53,7 +53,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * 
+ * 断言示例的数据初始化。
  * Init data for assertions examples.
  * 
  * @author Joel Costigliola
@@ -113,8 +113,11 @@ public abstract class AbstractAssertionsExamples {
   protected static PotentialMvpCondition potentialMvp;
   protected static Condition<BasketBallPlayer> doubleDoubleStats;
 
+  /**
+   * 设置一次。
+   */
   @BeforeClass
-  public static void setUpOnce() {
+  public static void setupOnce() {
     rose = new BasketBallPlayer(new Name("Derrick", "Rose"), "Chicago Bulls");
     rose.setAssistsPerGame(8);
     rose.setPointsPerGame(25);
@@ -136,7 +139,9 @@ public abstract class AbstractAssertionsExamples {
     noah.setPointsPerGame(10);
     noah.setReboundsPerGame(11);
     players = newArrayList(rose, james, durant, noah);
+
     potentialMvp = new PotentialMvpCondition();
+    // 条件对象
     doubleDoubleStats = new Condition<BasketBallPlayer>("double double stats") {
       @Override
       public boolean matches(BasketBallPlayer player) {
