@@ -17,6 +17,7 @@ import static org.assertj.examples.data.Alignment.GOOD;
 import static org.assertj.examples.data.Alignment.NEUTRAL;
 
 /**
+ * 《指环王》中的托尔金种族。
  * Race in Tolkien's Lord of the Rings.
  * 
  * @author Joel Costigliola

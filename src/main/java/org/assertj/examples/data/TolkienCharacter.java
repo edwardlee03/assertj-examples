@@ -13,7 +13,7 @@
 package org.assertj.examples.data;
 
 /**
- * 
+ * 托尔金的性格对象。
  * A simple class to illustrate AssertJ assertions.
  * 
  * @author Joel Costigliola

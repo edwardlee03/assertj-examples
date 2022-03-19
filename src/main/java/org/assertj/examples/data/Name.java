@@ -13,6 +13,8 @@
 package org.assertj.examples.data;
 
 /**
+ * 人类姓名对象。
+ *
  * @author Yvonne Wang
  */
 public class Name {

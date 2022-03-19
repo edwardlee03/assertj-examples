@@ -17,7 +17,7 @@ import org.assertj.examples.data.BasketBallPlayer;
 import org.assertj.core.api.Condition;
 
 /**
- * 
+ * 潜在的MVP条件。
  * A {@code Condition} checking if a {@link BasketBallPlayer} is a potential MVP.
  * 
  * @author Joel Costigliola
@@ -31,6 +31,5 @@ public class PotentialMvpCondition extends Condition<BasketBallPlayer> {
   @Override
   public boolean matches(BasketBallPlayer player) {
     return player.getPointsPerGame() > 20 && (player.getAssistsPerGame() >= 8 || player.getReboundsPerGame() >= 8);
-  };
-
+  }
 }

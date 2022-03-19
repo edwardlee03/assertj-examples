@@ -17,6 +17,8 @@ import org.assertj.examples.exception.NameException;
 import static java.lang.String.format;
 
 /**
+ * 篮球运动员对象。
+ *
  * @author Joel Costigliola
  */
 public class BasketBallPlayer {

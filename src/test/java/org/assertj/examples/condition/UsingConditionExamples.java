@@ -25,8 +25,14 @@ import org.junit.Test;
 
 import org.assertj.core.api.Condition;
 
+/**
+ * 使用条件对象示例。
+ */
 public class UsingConditionExamples extends AbstractAssertionsExamples {
 
+  /**
+   * 是条件示例。
+   */
   @Test
   public void is_condition_example() {
     assertThat("Yoda").is(jedi);
@@ -36,6 +42,9 @@ public class UsingConditionExamples extends AbstractAssertionsExamples {
     assertThat(noah).isNot(potentialMvp);
   }
 
+  /**
+   * 享有条件示例。
+   */
   @Test
   public void has_condition_example() {
     assertThat("Yoda").has(jediPower);
@@ -49,6 +58,9 @@ public class UsingConditionExamples extends AbstractAssertionsExamples {
     }
   }
 
+  /**
+   * 任何条件示例。
+   */
   @SuppressWarnings("unchecked")
   @Test
   public void anyOf_condition_example() {
@@ -105,22 +117,29 @@ public class UsingConditionExamples extends AbstractAssertionsExamples {
     assertThat("Solo").is(allOf(not(jedi), not(sith)));
   }
 
+  /**
+   * 元素包含条件
+   */
   private final Condition<String> jedi = new Condition<String>("jedi") {
     private final Set<String> jedis = newLinkedHashSet("Luke", "Yoda", "Obiwan");
 
     @Override
     public boolean matches(String value) {
+      // 元素包含条件匹配
       return jedis.contains(value);
-    };
+    }
   };
 
+  /**
+   * 元素包含条件
+   */
   private final Condition<String> jediPower = new Condition<String>("jedi power") {
     private final Set<String> jedis = newLinkedHashSet("Luke", "Yoda", "Obiwan");
 
     @Override
     public boolean matches(String value) {
       return jedis.contains(value);
-    };
+    }
   };
 
   private final Condition<String> sith = new Condition<String>("sith") {
@@ -129,7 +148,7 @@ public class UsingConditionExamples extends AbstractAssertionsExamples {
     @Override
     public boolean matches(String value) {
       return siths.contains(value);
-    };
+    }
   };
 
   private final Condition<String> sithPower = new Condition<String>("sith power") {
@@ -138,7 +157,7 @@ public class UsingConditionExamples extends AbstractAssertionsExamples {
     @Override
     public boolean matches(String value) {
       return siths.contains(value);
-    };
+    }
   };
 
 }
