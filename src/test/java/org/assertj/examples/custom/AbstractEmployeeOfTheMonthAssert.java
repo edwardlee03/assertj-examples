@@ -12,7 +12,9 @@
  */
 package org.assertj.examples.custom;
 
-
+/**
+ * 雇员的月份数断言抽象类。
+ */
 public class AbstractEmployeeOfTheMonthAssert<S extends AbstractEmployeeOfTheMonthAssert<S, A>, A extends EmployeeOfTheMonth>
     extends AbstractEmployeeAssert<S, A> {
 
@@ -20,8 +22,12 @@ public class AbstractEmployeeOfTheMonthAssert<S extends AbstractEmployeeOfTheMon
     super(actual, selfType);
   }
 
+  /**
+   * 月份数
+   */
   public S forMonth(int month) {
     isNotNull();
+
     // we overrides the default error message with a more explicit one
     String errorMessage = "\nExpected month of:\n  <%s>\nto be:\n  <%s>\n but was:\n  <%s>";
 

@@ -12,7 +12,11 @@
  */
 package org.assertj.examples.custom;
 
+/**
+ * 人类对象。
+ */
 public class Human {
+
   public String name;
 
   public String getName() {
@@ -31,6 +35,4 @@ public class Human {
   public Human() {
     super();
   }
-  
-  
 }

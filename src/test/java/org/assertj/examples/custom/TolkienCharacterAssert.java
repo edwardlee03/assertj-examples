@@ -16,15 +16,18 @@ import org.assertj.core.api.AbstractAssert;
 import org.assertj.examples.data.TolkienCharacter;
 
 /**
- * A simple class to illustrate how to extend AssertJ assertions with custom ones to make assertions speicific to
+ * 托尔金的性格断言。
+ * A simple class to illustrate how to extend AssertJ assertions with custom ones to make assertions specific to
  * {@link TolkienCharacter}.
  * 
  * @author Joel Costigliola
  */
 // 1 - Remember to inherit from AbstractAssert !
+// 1 - 记住要继承AbstractAssert
 public class TolkienCharacterAssert extends AbstractAssert<TolkienCharacterAssert, TolkienCharacter> {
 
   // 2 - Write a constructor to build your assertion class from the object you want make assertions on.
+  // 2 - 编写一个构造函数，从要对其进行断言的对象构建断言类。
   /**
    * Creates a new </code>{@link TolkienCharacterAssert}</code> to make assertions on actual TolkienCharacter.
    * 
@@ -35,6 +38,7 @@ public class TolkienCharacterAssert extends AbstractAssert<TolkienCharacterAsser
   }
 
   // 3 - A fluent entry point to your specific assertion class
+  // 3 - 指向特定断言类的流式入口点
   // the other option here is to gather all your specific assertions entry point to a class inehriting from Assertions
   // thus this class will be your oonly entry poiny to all AssertJ assertions and YOURS.
   // see MyProjectAssertions for an example.
@@ -50,6 +54,7 @@ public class TolkienCharacterAssert extends AbstractAssert<TolkienCharacterAsser
   }
 
   // 4 - a specific assertion
+  // 4 - 一个特定的断言
   /**
    * Verifies that the actual TolkienCharacter's name is equal to the given one.
    * 

@@ -12,7 +12,9 @@
  */
 package org.assertj.examples.custom;
 
-
+/**
+ * 雇员断言抽象类。
+ */
 public class AbstractEmployeeAssert<S extends AbstractEmployeeAssert<S, A>, A extends Employee>
     extends AbstractHumanAssert<S, A> {
 
@@ -20,6 +22,9 @@ public class AbstractEmployeeAssert<S extends AbstractEmployeeAssert<S, A>, A ex
     super(actual, selfType);
   }
 
+  /**
+   * 职称
+   */
   public S hasJobTitle(String jobTitle) {
     isNotNull();
 

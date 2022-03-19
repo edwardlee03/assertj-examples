@@ -12,8 +12,11 @@
  */
 package org.assertj.examples.custom;
 
-
+/**
+ * 雇员断言。
+ */
 public class EmployeeAssert extends AbstractEmployeeAssert<EmployeeAssert, Employee> {
+
   public EmployeeAssert(Employee actual) {
     super(actual, EmployeeAssert.class);
   }

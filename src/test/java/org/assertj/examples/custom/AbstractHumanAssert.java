@@ -14,12 +14,18 @@ package org.assertj.examples.custom;
 
 import org.assertj.core.api.AbstractAssert;
 
+/**
+ * 人类断言抽象类。
+ */
 public class AbstractHumanAssert<S extends AbstractHumanAssert<S, A>, A extends Human> extends AbstractAssert<S, A> {
 
   public AbstractHumanAssert(A actual, Class<S> selfType) {
     super(actual, selfType);
   }
 
+  /**
+   * 姓名
+   */
   public S hasName(String name) {
     isNotNull();
 

@@ -12,8 +12,10 @@
  */
 package org.assertj.examples.custom;
 
-
-public class EmployeeOfTheMonth extends Employee  {
+/**
+ * 雇员和其月份数。
+ */
+public class EmployeeOfTheMonth extends Employee {
 
     private int month;
 

@@ -12,10 +12,12 @@
  */
 package org.assertj.examples.custom;
 
-
+/**
+ * 人类断言。
+ */
 public class HumanAssert extends AbstractHumanAssert<HumanAssert, Human> {
+
   public HumanAssert(Human actual) {
     super(actual, HumanAssert.class);
   }
-
 }

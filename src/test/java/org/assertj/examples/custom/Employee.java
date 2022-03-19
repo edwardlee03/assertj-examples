@@ -12,7 +12,11 @@
  */
 package org.assertj.examples.custom;
 
+/**
+ * 雇员对象。
+ */
 public class Employee extends Human {
+  
   public String jobTitle;
 
   public Employee() {
@@ -22,5 +26,4 @@ public class Employee extends Human {
   public Employee(String name) {
     super(name);
   }
-  
 }

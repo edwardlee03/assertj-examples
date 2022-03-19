@@ -17,7 +17,6 @@ import static com.google.common.collect.Lists.newArrayList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.examples.custom.MyProjectAssertions.assertThat;
 
-import java.io.IOException;
 import java.util.List;
 
 import org.junit.Test;
@@ -26,7 +25,7 @@ import org.assertj.examples.AbstractAssertionsExamples;
 import org.assertj.examples.data.TolkienCharacter;
 
 /**
- *
+ * 自定义断言示例。
  * Shows some example of a custom assertion class: {@link TolkienCharacterAssert} that allows us to make assertions
  * specific to {@link TolkienCharacter}.
  *
@@ -34,6 +33,9 @@ import org.assertj.examples.data.TolkienCharacter;
  */
 public class CustomAssertExamples extends AbstractAssertionsExamples {
 
+  /**
+   * 成功的自定义断言示例。
+   */
   @Test
   public void successful_custom_assertion_example() {
     // custom assertion : assertThat is resolved from TolkienCharacterAssert static import
@@ -50,6 +52,9 @@ public class CustomAssertExamples extends AbstractAssertionsExamples {
     assertThat(frodo.age).isEqualTo(33);
   }
 
+  /**
+   * 失败的自定义断言示例。
+   */
   @Test
   public void failed_custom_assertion_example() {
     sam.setName("Sammy");
@@ -91,7 +96,7 @@ public class CustomAssertExamples extends AbstractAssertionsExamples {
   }
 
   @Test
-  public void generics_limitation() throws IOException {
+  public void generics_limitation() {
     Employee martin = new Employee("Martin Fowler");
     Employee kent = new Employee("Kent Beck");
     List<Employee> employees = newArrayList(martin, kent);

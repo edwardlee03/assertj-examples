@@ -12,7 +12,9 @@
  */
 package org.assertj.examples.custom;
 
-
+/**
+ * 雇员和其月份数断言。
+ */
 public class EmployeeOfTheMonthAssert extends AbstractEmployeeOfTheMonthAssert<EmployeeOfTheMonthAssert, EmployeeOfTheMonth> {
 
     public static EmployeeOfTheMonthAssert assertThat(EmployeeOfTheMonth actual) {
@@ -22,6 +24,4 @@ public class EmployeeOfTheMonthAssert extends AbstractEmployeeOfTheMonthAssert<E
     public EmployeeOfTheMonthAssert(EmployeeOfTheMonth actual) {
         super(actual, EmployeeOfTheMonthAssert.class);
     }
-
 }
-
