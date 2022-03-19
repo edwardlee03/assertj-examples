@@ -18,22 +18,30 @@ import java.time.Period;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * 周期的断言示例。
+ */
 public class PeriodAssertionsExamples {
 
   @Test
   public void duration_assertions_examples() {
 
-    assertThat(Period.ofDays(5)).hasDays(5);
-    assertThat(Period.ofMonths(15)).hasMonths(15);
-    assertThat(Period.ofYears(100)).hasYears(100);
+    assertThat(Period.ofDays(5))
+        .hasDays(5);
+    assertThat(Period.ofMonths(15))
+        .hasMonths(15);
+    assertThat(Period.ofYears(100))
+        .hasYears(100);
 
-    assertThat(Period.of(1, 2, 3)).hasYears(1)
-                                  .hasMonths(2)
-                                  .hasDays(3)
-                                  .isPositive();
+    assertThat(Period.of(1, 2, 3))
+        .hasYears(1)
+        .hasMonths(2)
+        .hasDays(3)
+        .isPositive();
 
-    assertThat(Period.ofDays(-5)).hasDays(-5)
-                                 .isNegative();
+    assertThat(Period.ofDays(-5))
+        .hasDays(-5)
+        .isNegative();
   }
 
 }
