@@ -26,7 +26,8 @@ public class JUnit5SoftAssertionsExamples extends AbstractAssertionsExamples {
   public void successful_soft_assertions_example(SoftAssertions softly) {
     Mansion mansion = new Mansion();
     mansion.hostPotentiallyMurderousDinnerParty();
-    softly.assertThat(mansion.guests()).as("Living Guests").isEqualTo(6);
+    softly.assertThat(mansion.guests())
+        .as("Living Guests").isEqualTo(6);
     softly.assertThat(mansion.kitchen()).as("Kitchen").isEqualTo("clean");
     softly.assertThat(mansion.library()).as("Library").isEqualTo("messy");
     softly.assertThat(mansion.revolverAmmo()).as("Revolver Ammo").isEqualTo(6);
@@ -36,7 +37,8 @@ public class JUnit5SoftAssertionsExamples extends AbstractAssertionsExamples {
 
     // chained assertion example
     String name = "Michael Jordan";
-    softly.assertThat(name).startsWith("Mich").contains("Jor").endsWith("dan");
+    softly.assertThat(name)
+        .startsWith("Mich").contains("Jor").endsWith("dan");
 
     // no need to call softly.assertAll(); (as with SoftAssertions) error gathering is handled by the JUnit rule
   }
@@ -47,7 +49,8 @@ public class JUnit5SoftAssertionsExamples extends AbstractAssertionsExamples {
   public void failing_junit_soft_assertions_example(SoftAssertions softly) {
     Mansion mansion = new Mansion();
     mansion.hostPotentiallyMurderousDinnerParty();
-    softly.assertThat(mansion.guests()).as("Living Guests").isEqualTo(7);
+    softly.assertThat(mansion.guests())
+        .as("Living Guests").isEqualTo(7);
     softly.assertThat(mansion.kitchen()).as("Kitchen").isEqualTo("clean");
     softly.assertThat(mansion.library()).as("Library").isEqualTo("clean");
     softly.assertThat(mansion.revolverAmmo()).as("Revolver Ammo").isEqualTo(6);
@@ -59,7 +62,8 @@ public class JUnit5SoftAssertionsExamples extends AbstractAssertionsExamples {
 
   @Test
   public void filteredOn_with_junit_soft_assertions_example(SoftAssertions softly) {
-    softly.assertThat(fellowshipOfTheRing).filteredOn("name", "Frodo").isNotEmpty();
+    softly.assertThat(fellowshipOfTheRing)
+        .filteredOn("name", "Frodo").isNotEmpty();
   }
 
 }
