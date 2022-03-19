@@ -26,6 +26,7 @@ import org.junit.Test;
 
 /**
  * File and stream usage examples.
+ * 文件和IO数据流使用的断言示例。
  * 
  * @author Joel Costigliola
  */
@@ -35,16 +36,21 @@ public class FileAndStreamAssertionsExamples extends AbstractAssertionsExamples 
   public void file_assertions_examples() throws Exception {
     // file assertion
     File xFile = writeFile("xFile", "The Truth Is Out There");
-    assertThat(xFile).exists().isFile().isRelative();
-    assertThat(xFile).canRead().canWrite();
-    assertThat(contentOf(xFile)).startsWith("The Truth").contains("Is Out").endsWith("There");
+    assertThat(xFile)
+        .exists().isFile().isRelative();
+    assertThat(xFile)
+        .canRead().canWrite();
+    assertThat(contentOf(xFile))
+        .startsWith("The Truth").contains("Is Out").endsWith("There");
 
     // compare content with another file
     File xFileClone = writeFile("xFileClone", "The Truth Is Out There");
-    assertThat(xFile).hasContentEqualTo(xFileClone);
+    assertThat(xFile)
+        .hasContentEqualTo(xFileClone);
 
     // compare content with a string
-    assertThat(xFile).hasContent("The Truth Is Out There");
+    assertThat(xFile)
+        .hasContent("The Truth Is Out There");
 
     // compare content with a string, specifying a character set
     Charset turkishCharset = Charset.forName("windows-1254");
@@ -61,9 +67,9 @@ public class FileAndStreamAssertionsExamples extends AbstractAssertionsExamples 
   }
   
   @Test
-
   public void stream_assertions_examples() throws Exception {
-    assertThat(streamFrom("string")).hasContentEqualTo(streamFrom("string"));
+    assertThat(streamFrom("string"))
+        .hasContentEqualTo(streamFrom("string"));
   }
 
   // helper methods
