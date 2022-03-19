@@ -41,6 +41,7 @@ import org.assertj.examples.data.movie.Movie;
 
 /**
  * Array assertions examples.
+ * 数组的断言示例。
  * 
  * @author Joel Costigliola
  */
@@ -57,10 +58,14 @@ public class ArrayAssertionsExamples extends AbstractAssertionsExamples {
     assertThat(elvesRings).contains(nenya).doesNotContain(oneRing);
 
     // you can check element at a given index (we use Index.atIndex(int) synthetic sugar for better readability).
-    assertThat(elvesRings).contains(vilya, atIndex(0)).contains(nenya, atIndex(1)).contains(narya, atIndex(2));
+    assertThat(elvesRings).contains(vilya, atIndex(0))
+        .contains(nenya, atIndex(1))
+        .contains(narya, atIndex(2));
+
     // with containsOnly, all the elements must be present (but the order is not important)
     assertThat(elvesRings).containsOnly(nenya, vilya, narya);
     assertThat(elvesRings).doesNotContainNull().doesNotHaveDuplicates();
+
     // special check for null, empty collection or both
     assertThat(newArrayList(frodo, null, sam)).containsNull();
     Object[] array = array();
@@ -69,10 +74,12 @@ public class ArrayAssertionsExamples extends AbstractAssertionsExamples {
     assertThat(array).isNullOrEmpty();
     array = null;
     assertThat(array).isNullOrEmpty();
+
     // you can also check the start or end of your collection/iterable
     Ring[] allRings = array(oneRing, vilya, nenya, narya, dwarfRing, manRing);
     assertThat(allRings).startsWith(oneRing, vilya).endsWith(dwarfRing, manRing);
     assertThat(allRings).containsSequence(nenya, narya, dwarfRing);
+
     // you can check that an array is sorted
     TolkienCharacter[] fellowshipOfTheRingArray = fellowshipOfTheRing.toArray(new TolkienCharacter[0]);
     Arrays.sort(fellowshipOfTheRingArray, ageComparator);
@@ -89,6 +96,9 @@ public class ArrayAssertionsExamples extends AbstractAssertionsExamples {
     assertThat(array).containsSubsequence("a=b", "c=d");
   }
 
+  /**
+   * 使用自定义的比较器。
+   */
   @Test
   public void array_assertions_with_custom_comparison_examples() {
     TolkienCharacter[] fellowshipOfTheRingCharacters = fellowshipOfTheRing.toArray(new TolkienCharacter[0]);
@@ -119,50 +129,63 @@ public class ArrayAssertionsExamples extends AbstractAssertionsExamples {
     }
   }
 
+  /**
+   * 属性/字段的值。
+   */
   @Test
-  public void arra_assertions_on_extracted_values_example() {
+  public void array_assertions_on_extracted_values_example() {
     TolkienCharacter[] fellowshipOfTheRingArray = fellowshipOfTheRing.toArray(new TolkienCharacter[0]);
 
     // extract simple property value (having a java standard type)
-    assertThat(extractProperty("name").from(fellowshipOfTheRingArray)).contains("Boromir", "Gandalf", "Frodo",
-                                                                                "Legolas")
-                                                                      .doesNotContain("Sauron", "Elrond");
+    assertThat(extractProperty("name").from(fellowshipOfTheRingArray))
+        .contains("Boromir", "Gandalf", "Frodo", "Legolas")
+        .doesNotContain("Sauron", "Elrond");
 
     // extracting property works also with user's types (here Race)
-    assertThat(extractProperty("race").from(fellowshipOfTheRingArray)).contains(HOBBIT, ELF).doesNotContain(ORC);
+    assertThat(extractProperty("race").from(fellowshipOfTheRingArray))
+        .contains(HOBBIT, ELF).doesNotContain(ORC);
 
     // same assertion but specifying the type of the extracted values (here Race)
-    assertThat(fellowshipOfTheRingArray).extracting("race", Race.class)
-                                        .contains(HOBBIT, ELF)
-                                        .doesNotContain(ORC);
+    assertThat(fellowshipOfTheRingArray)
+        .extracting("race", Race.class)
+        .contains(HOBBIT, ELF)
+        .doesNotContain(ORC);
 
     // extract nested property on Race
-    assertThat(extractProperty("race.name").from(fellowshipOfTheRingArray)).contains("Hobbit", "Elf")
-                                                                           .doesNotContain("Orc");
+    assertThat(extractProperty("race.name").from(fellowshipOfTheRingArray))
+        .contains("Hobbit", "Elf")
+        .doesNotContain("Orc");
 
     // same assertions but written with extracting(), it has the advantage of being able to extract field values as well
     // as property values
 
     // extract 'name' property values.
-    assertThat(fellowshipOfTheRing).extracting("name")
-                                   .contains("Boromir", "Gandalf", "Frodo", "Legolas")
-                                   .doesNotContain("Sauron", "Elrond");
+    assertThat(fellowshipOfTheRing)
+        .extracting("name")
+        .contains("Boromir", "Gandalf", "Frodo", "Legolas")
+        .doesNotContain("Sauron", "Elrond");
 
     // extract 'age' field values, it works because 'age' is public in TolkienCharacter class.
-    assertThat(fellowshipOfTheRing).extracting("age")
-                                   .contains(33, 38, 36);
+    assertThat(fellowshipOfTheRing)
+        .extracting("age")
+        .contains(33, 38, 36);
 
     // extracting works also with user's types (here Race),
-    assertThat(fellowshipOfTheRing).extracting("race")
-                                   .contains(HOBBIT, ELF)
-                                   .doesNotContain(ORC);
+    assertThat(fellowshipOfTheRing)
+        .extracting("race")
+        .contains(HOBBIT, ELF)
+        .doesNotContain(ORC);
 
     // extract nested property values on Race
-    assertThat(fellowshipOfTheRing).extracting("race.name")
-                                   .contains("Hobbit", "Elf")
-                                   .doesNotContain("Orc");
+    assertThat(fellowshipOfTheRing)
+        .extracting("race.name")
+        .contains("Hobbit", "Elf")
+        .doesNotContain("Orc");
   }
 
+  /**
+   * 排序。
+   */
   @Test
   public void array_is_sorted_assertion_example() {
 
@@ -175,17 +198,26 @@ public class ArrayAssertionsExamples extends AbstractAssertionsExamples {
         return -ring1.compareTo(ring2);
       }
     };
-    assertThat(new Ring[] { manRing, dwarfRing, narya, nenya, vilya, oneRing }).isSortedAccordingTo(
-                                                                                                    increasingPowerRingComparator);
+    assertThat(new Ring[] { manRing, dwarfRing, narya, nenya, vilya, oneRing })
+        .isSortedAccordingTo(increasingPowerRingComparator);
   }
 
+  /**
+   * 过滤器。
+   */
   @Test
   public void filter_then_extract_assertion_example() {
-    Iterable<TolkienCharacter> badBadGuys = filter(orcsWithHobbitPrisoners).with("race.alignment", EVIL).get();
-    assertThat(badBadGuys).extracting("name").containsOnly("Guruk");
-
+    Iterable<TolkienCharacter> badBadGuys = filter(orcsWithHobbitPrisoners)
+        .with("race.alignment", EVIL)
+        .get();
+    assertThat(badBadGuys)
+        .extracting("name")
+        .containsOnly("Guruk");
   }
 
+  /**
+   * 基本类型。
+   */
   @Test
   public void contains_exactly_for_basic_types_assertion_examples() {
     // int
@@ -265,13 +297,18 @@ public class ArrayAssertionsExamples extends AbstractAssertionsExamples {
     assertThat(new char[] { 'a', 'b', 'c' }).containsOnlyOnce('a', 'b');
   }
 
+  /**
+   * 包含子序列。
+   */
   @Test
   public void containsSubSequence_assertion_examples() {
     assertThat(new String[] {"Batman", "is", "weaker", "than", "Superman", "but", "he", "is", "less", "annoying"})
       .containsSubsequence("Superman", "is", "annoying");
-    assertThat(new String[] {"Breaking", "objects", "is", "pretty", "bad"}).containsSubsequence("Breaking", "bad");
+    assertThat(new String[] {"Breaking", "objects", "is", "pretty", "bad"})
+        .containsSubsequence("Breaking", "bad");
     try {
-      assertThat(new String[] {"A", "B", "C", "D"}).containsSubsequence("B", "A", "C");
+      assertThat(new String[] {"A", "B", "C", "D"})
+          .containsSubsequence("B", "A", "C");
     } catch (AssertionError e) {
       logAssertionErrorMessage("containsSubsequence for Array", e);
     }
