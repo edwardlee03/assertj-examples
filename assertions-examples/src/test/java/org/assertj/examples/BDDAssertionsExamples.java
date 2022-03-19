@@ -43,12 +43,14 @@ public class BDDAssertionsExamples extends AbstractAssertionsExamples {
   @Test
   public void given_when_then_with_mockito() {
 
-    given(teamManager.getPlayers()).willReturn(asList(rose, james, durant));
+    given(teamManager.getPlayers())
+        .willReturn(asList(rose, james, durant));
 
     // when
     boolean result = sut.play();
 
-    then(result).isTrue();
+    then(result)
+        .isTrue();
   }
 
   @Test
@@ -78,7 +80,8 @@ public class BDDAssertionsExamples extends AbstractAssertionsExamples {
     bulls.add(rose);
     bulls.add(noah);
 
-    then(bulls).contains(rose, noah).doesNotContain(james);
+    then(bulls).contains(rose, noah)
+        .doesNotContain(james);
   }
 
   @Test
