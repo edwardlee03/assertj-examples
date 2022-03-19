@@ -23,7 +23,8 @@ import org.assertj.examples.data.Ring;
 import org.assertj.examples.data.TolkienCharacter;
 
 /**
- * Class assertions specific examples
+ * Class assertions specific examples.
+ * 类型的断言示例。
  * 
  * @author Joel Costigliola
  */
@@ -32,24 +33,31 @@ public class ClassAssertionsExamples extends AbstractAssertionsExamples {
   @Test
   public void class_assertions_examples() {
 
-    assertThat(Magical.class).isAnnotation();
-    assertThat(Ring.class).isNotAnnotation();
-    assertThat(Ring.class).hasAnnotation(Magical.class);
+    assertThat(Magical.class)
+        .isAnnotation();
+    assertThat(Ring.class)
+        .isNotAnnotation();
+    assertThat(Ring.class)
+        .hasAnnotation(Magical.class);
 
     try {
-      assertThat(Ring.class).isAnnotation();
+      assertThat(Ring.class)
+          .isAnnotation();
     } catch (AssertionError e) {
       logAssertionErrorMessage("isAnnotation", e);
     }
     
     try {
-      assertThat(TolkienCharacter.class).hasAnnotation(Magical.class);
+      assertThat(TolkienCharacter.class)
+          .hasAnnotation(Magical.class);
     } catch (AssertionError e) {
       logAssertionErrorMessage("isAnnotation", e);
     }
     
-    assertThat(TolkienCharacter.class).isNotInterface();
-    assertThat(Person.class).isAssignableFrom(Employee.class);
+    assertThat(TolkienCharacter.class)
+        .isNotInterface();
+    assertThat(Person.class)
+        .isAssignableFrom(Employee.class);
   }
 
 }
