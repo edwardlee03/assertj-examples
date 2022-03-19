@@ -14,7 +14,11 @@ package org.assertj.examples.exception;
 
 import org.assertj.examples.data.Name;
 
+/**
+ * 名称异常。
+ */
 public class NameException extends Exception {
+
   public NameException(Name name) {
     super("Invalid name " + name);
   }

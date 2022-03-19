@@ -13,6 +13,7 @@
 package org.assertj.examples.data;
 
 public class Mansion {
+
   private int guests = 6;
   private int revolverAmmo = 6;
   private String kitchen = "clean";

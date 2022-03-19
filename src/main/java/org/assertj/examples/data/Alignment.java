@@ -13,5 +13,9 @@
 package org.assertj.examples.data;
 
 public enum Alignment {
-  SUPER_EVIL, EVIL, NEUTRAL, GOOD, SUPER_GOOD;
+  SUPER_EVIL,
+  EVIL,
+  NEUTRAL,
+  GOOD,
+  SUPER_GOOD
 }

@@ -12,7 +12,6 @@
  */
 package org.assertj.examples.data;
 
-
 /**
  * @author Yvonne Wang
  */

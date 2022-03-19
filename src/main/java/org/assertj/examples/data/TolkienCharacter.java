@@ -83,5 +83,4 @@ public class TolkienCharacter {
   public String toString() {
     return "Character [name=" + name + ", race=" + race + ", age=" + age + "]";
   }
-
 }

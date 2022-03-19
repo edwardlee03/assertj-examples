@@ -14,8 +14,6 @@ package org.assertj.examples.data;
 
 import org.assertj.examples.exception.NameException;
 
-import java.io.IOException;
-
 import static java.lang.String.format;
 
 /**

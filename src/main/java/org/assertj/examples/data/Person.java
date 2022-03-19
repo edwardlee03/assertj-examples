@@ -12,8 +12,11 @@
  */
 package org.assertj.examples.data;
 
-
+/**
+ * 人类对象。
+ */
 public class Person {
+
   private final String name;
   private final int age;
 
@@ -62,5 +65,4 @@ public class Person {
       return false;
     return true;
   }
-
 }

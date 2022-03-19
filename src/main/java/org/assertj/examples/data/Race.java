@@ -24,7 +24,12 @@ import static org.assertj.examples.data.Alignment.NEUTRAL;
  */
 public enum Race {
 
-  HOBBIT("Hobbit", false, GOOD), MAIA("Maia", true, GOOD), MAN("Man", false, NEUTRAL), ELF("Elf", true, GOOD), DWARF("Dwarf", false, GOOD), ORC("Orc", false, EVIL);
+  HOBBIT("Hobbit", false, GOOD),
+  MAIA("Maia", true, GOOD),
+  MAN("Man", false, NEUTRAL),
+  ELF("Elf", true, GOOD),
+  DWARF("Dwarf", false, GOOD),
+  ORC("Orc", false, EVIL);
 
   private final String name;
   private final boolean immortal;

@@ -14,6 +14,9 @@ package org.assertj.examples.data.movie;
 
 import java.util.Date;
 
+/**
+ * 电影对象。
+ */
 public class Movie {
 
   private String title;
@@ -64,5 +67,4 @@ public class Movie {
     } else if (!title.equals(other.title)) return false;
     return true;
   }
-
 }

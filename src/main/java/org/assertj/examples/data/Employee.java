@@ -12,6 +12,9 @@
  */
 package org.assertj.examples.data;
 
+/**
+ * 雇员对象。
+ */
 public class Employee extends Person {
 
   private String company;
