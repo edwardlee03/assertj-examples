@@ -24,6 +24,7 @@ import org.junit.Test;
 
 /**
  * Assertions available for all objects.
+ * 所有对象的断言示例。
  * 
  * @author Joel Costigliola
  */
@@ -31,37 +32,52 @@ public class BasicAssertionsExamples extends AbstractAssertionsExamples {
 
   // the data used are initialized in AbstractAssertionsExamples.
 
+  /**
+   * 相等方法的断言示例。
+   */
   @Test
   public void isEqualTo_isNotEqualTo_assertions_examples() {
     // the most simple assertion
-    assertThat(frodo.age).isEqualTo(33);
-    assertThat(frodo.getName()).isEqualTo("Frodo").isNotEqualTo("Frodon");
+    assertThat(frodo.age)
+        .isEqualTo(33);
+    assertThat(frodo.getName())
+        .isEqualTo("Frodo").isNotEqualTo("Frodon");
     // shows that we are no more limited by generics, if we had defined isEqualTo to take only the type of actual
     // (TolkienCharacter) the assertion below would not have compiled
     Object frodoAsObject = frodo;
-    assertThat(frodo).isEqualTo(frodoAsObject);
+    assertThat(frodo)
+        .isEqualTo(frodoAsObject);
   }
 
+  /**
+   * 有意义的错误。
+   */
   @Test
   public void meaningful_error_with_test_description_example() {
     try {
       // set a bad age to Mr Frodo, just to see how nice is the assertion error message
       frodo.setAge(50);
       // you can specify a test description with as() method or describedAs(), it supports String format args
-      assertThat(frodo.getAge()).as("check %s's age", frodo.getName()).isEqualTo(33);
+      assertThat(frodo.getAge())
+          .as("check %s's age", frodo.getName())
+          .isEqualTo(33);
     } catch (AssertionError e) {
       assertThat(e).hasMessage("[check Frodo's age] expected:<[33]> but was:<[50]>");
     }
     // but you still can overrides the error message if you have a better one :
     try {
-      assertThat(frodo.getName()).as("check Frodo's name")
-          .overridingErrorMessage("Hey my name is Frodo not %s", frodo.getName()).isEqualTo("Frodo");
+      assertThat(frodo.getName())
+          .as("check Frodo's name")
+          .overridingErrorMessage("Hey my name is Frodo not %s", frodo.getName())
+          .isEqualTo("Frodo");
     } catch (AssertionError e) {
       assertThat(e).hasMessage("[check Frodo's name] Hey my name is Frodo not Frodon");
     }
     // if you still can overrides the error message if you have a better one :
     try {
-      assertThat(frodo.getName()).overridingErrorMessage("Hey my name is Frodo not (%)").isEqualTo("Frodo");
+      assertThat(frodo.getName())
+          .overridingErrorMessage("Hey my name is Frodo not (%)")
+          .isEqualTo("Frodo");
     } catch (AssertionError e) {
       assertThat(e).hasMessage("Hey my name is Frodo not (%)");
     }
@@ -76,6 +92,9 @@ public class BasicAssertionsExamples extends AbstractAssertionsExamples {
     assertThat(jake).isSameAs(sameJake).isNotSameAs(jakeClone);
   }
 
+  /**
+   * 在集合里面。
+   */
   @Test
   public void isIn_isNotIn_assertions_examples() {
     assertThat(frodo).isIn(fellowshipOfTheRing);
@@ -83,6 +102,9 @@ public class BasicAssertionsExamples extends AbstractAssertionsExamples {
     assertThat(sauron).isNotIn(fellowshipOfTheRing);
   }
 
+  /**
+   * 对象是否为null。
+   */
   @Test
   public void isNull_isNotNull_assertions_examples() {
     Object nullObject = null;
@@ -91,12 +113,20 @@ public class BasicAssertionsExamples extends AbstractAssertionsExamples {
     assertThat(nonNullObject).isNotNull();
   }
 
+  /**
+   * 判断对象实例的类型。
+   */
   @Test
   public void isInstanceOf_assertions_examples() {
-    assertThat(gandalf).isInstanceOf(TolkienCharacter.class).isInstanceOfAny(Object.class, TolkienCharacter.class);
-    assertThat(gandalf).isNotInstanceOf(Movie.class).isNotInstanceOfAny(Movie.class, Ring.class);
+    assertThat(gandalf).isInstanceOf(TolkienCharacter.class)
+        .isInstanceOfAny(Object.class, TolkienCharacter.class);
+    assertThat(gandalf).isNotInstanceOf(Movie.class)
+        .isNotInstanceOfAny(Movie.class, Ring.class);
   }
 
+  /**
+   * 错误信息。
+   */
   @Test
   public void assertion_error_message_differentiates_expected_and_actual_persons() {
     // Assertion error message is built with toString description of involved objects.
@@ -113,30 +143,38 @@ public class BasicAssertionsExamples extends AbstractAssertionsExamples {
     }
   }
 
+  /**
+   * 自定义比较器。
+   */
   @Test
   public void basic_assertions_with_custom_comparator_examples() {
 
     // standard comparison : frodo is not equal to sam ...
     assertThat(frodo).isNotEqualTo(sam);
     // ... but if we compare only character's race frodo is equal to sam
-    assertThat(frodo).usingComparator(raceNameComparator).isEqualTo(sam).isEqualTo(merry).isEqualTo(pippin);
+    assertThat(frodo).usingComparator(raceNameComparator)
+        .isEqualTo(sam).isEqualTo(merry).isEqualTo(pippin);
 
     // isIn assertion should be consistent with raceComparator :
-    assertThat(frodo).usingComparator(raceNameComparator).isIn(sam, merry, pippin);
+    assertThat(frodo).usingComparator(raceNameComparator)
+        .isIn(sam, merry, pippin);
 
     // chained assertions use the specified comparator, we thus can write
-    assertThat(frodo).usingComparator(raceNameComparator).isEqualTo(sam).isIn(merry, pippin);
+    assertThat(frodo).usingComparator(raceNameComparator)
+        .isEqualTo(sam).isIn(merry, pippin);
 
     // note that error message mentions the comparator used to understand the failure better.
     try {
-      assertThat(frodo).usingComparator(raceNameComparator).isEqualTo(sauron);
+      assertThat(frodo).usingComparator(raceNameComparator)
+          .isEqualTo(sauron);
     } catch (AssertionError e) {
       logAssertionErrorMessage("isEqualTo with custom comparator", e);
     }
 
     // custom comparison by race : frodo IS equal to sam => isNotEqual must fail
     try {
-      assertThat(frodo).usingComparator(raceNameComparator).isNotEqualTo(sam);
+      assertThat(frodo).usingComparator(raceNameComparator)
+          .isNotEqualTo(sam);
     } catch (AssertionError e) {
       logAssertionErrorMessage("isNotEqualTo with custom comparator", e);
     }
