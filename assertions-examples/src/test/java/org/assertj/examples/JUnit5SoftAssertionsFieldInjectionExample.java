@@ -48,4 +48,5 @@ public class JUnit5SoftAssertionsFieldInjectionExample {
       // no need to call softly.assertAll(), this is done by the extension
     }
   }
+
 }
