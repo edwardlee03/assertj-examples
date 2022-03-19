@@ -21,7 +21,8 @@ import java.util.Comparator;
 import org.junit.Test;
 
 /**
- * String assertions specific examples
+ * String assertions specific examples.
+ * 字符串的断言示例。
  *
  * @author Joel Costigliola
  */
@@ -30,16 +31,21 @@ public class StringAssertionsExamples extends AbstractAssertionsExamples {
   @Test
   public void string_assertions_examples() {
 
-    assertThat("Frodo").startsWith("Fro").endsWith("do").hasSize(5);
-    assertThat("Frodo").contains("rod").doesNotContain("fro");
-    assertThat("Frodo").containsOnlyOnce("do");
+    assertThat("Frodo")
+        .startsWith("Fro").endsWith("do")
+        .hasSize(5);
+    assertThat("Frodo")
+        .contains("rod").doesNotContain("fro");
+    assertThat("Frodo")
+        .containsOnlyOnce("do");
     try {
       assertThat("Frodo").containsOnlyOnce("o");
     } catch (AssertionError e) {
       logAssertionErrorMessage("String containsOnlyOnce", e);
     }
     // contains accepts multiple String to avoid chaining contains several times.
-    assertThat("Gandalf the grey").contains("alf", "grey");
+    assertThat("Gandalf the grey")
+        .contains("alf", "grey");
     try {
       assertThat("Gandalf the grey").contains("alf", "grey", "wizard", "ring");
     } catch (AssertionError e) {
@@ -47,7 +53,8 @@ public class StringAssertionsExamples extends AbstractAssertionsExamples {
     }
 
     String bookDescription = "{ 'title':'Games of Thrones', 'author':'George Martin'}";
-    assertThat(bookDescription).containsSequence("{", "title", "Games of Thrones", "}");
+    assertThat(bookDescription)
+        .containsSequence("{", "title", "Games of Thrones", "}");
 
     try {
       assertThat(bookDescription).containsSequence("{", "title", "author", "Games of Thrones", "}");
@@ -56,10 +63,12 @@ public class StringAssertionsExamples extends AbstractAssertionsExamples {
     }
 
     // you can ignore case for equals check
-    assertThat("Frodo").isEqualToIgnoringCase("FROdO");
+    assertThat("Frodo")
+        .isEqualToIgnoringCase("FROdO");
 
     // using regex
-    assertThat("Frodo").matches("..o.o").doesNotMatch(".*d");
+    assertThat("Frodo")
+        .matches("..o.o").doesNotMatch(".*d");
 
     // check for empty string, or not.
     assertThat("").isEmpty();
@@ -76,15 +85,21 @@ public class StringAssertionsExamples extends AbstractAssertionsExamples {
     // this is good but it doest not work with the other assertions : contains, startsWith, ...
     // if you want consistent ignoring case comparison, you must use a case iNsenSiTIve comparison strategy :
     // We see that assertions succeeds even though case is not the same - ok that was the point ;-)
-    assertThat("Frodo").usingComparator(caseInsensitiveStringComparator).startsWith("fr").endsWith("ODO");
+    assertThat("Frodo")
+        .usingComparator(caseInsensitiveStringComparator)
+        .startsWith("fr").endsWith("ODO");
 
     // All assertions made after usingComparator(caseInsensitiveStringComparator) are based on the given comparator ...
-    assertThat("Frodo").usingComparator(caseInsensitiveStringComparator).contains("fro").doesNotContain("don");
+    assertThat("Frodo")
+        .usingComparator(caseInsensitiveStringComparator)
+        .contains("fro").doesNotContain("don");
     // ... but a new assertions is not
     // assertThat("Frodo").startsWith("fr").endsWith("ODO"); // FAILS !!!
 
     // Last thing : matches or doesNotMatch don't use the given comparator
-    assertThat("Frodo").usingComparator(caseInsensitiveStringComparator).doesNotMatch("..O.O");
+    assertThat("Frodo")
+        .usingComparator(caseInsensitiveStringComparator)
+        .doesNotMatch("..O.O");
     try {
       // failed assertion with specific comparator mention the comparison strategy to help interpreting the error
       assertThat("Frodo").usingComparator(caseInsensitiveStringComparator).startsWith("FROO");
@@ -97,23 +112,33 @@ public class StringAssertionsExamples extends AbstractAssertionsExamples {
   public void charSequence_subclasses_assertions_examples() {
     // StringBuilder have same assertions as String
     StringBuilder stringBuilder = new StringBuilder("Frodo");
-    assertThat(stringBuilder).startsWith("Fro").endsWith("do").hasSize(5);
-    assertThat(stringBuilder).contains("rod").doesNotContain("fro");
-    assertThat(stringBuilder).containsOnlyOnce("do");
+    assertThat(stringBuilder)
+        .startsWith("Fro").endsWith("do").hasSize(5);
+    assertThat(stringBuilder)
+        .contains("rod").doesNotContain("fro");
+    assertThat(stringBuilder)
+        .containsOnlyOnce("do");
 
     Comparator<CharSequence> caseInsensitiveComparator = new Comparator<CharSequence>() {
       public int compare(CharSequence s1, CharSequence s2) {
         return s1.toString().toLowerCase().compareTo(s2.toString().toLowerCase());
       }
     };
-    assertThat(stringBuilder).usingComparator(caseInsensitiveComparator).contains("fro").doesNotContain("don");
+    assertThat(stringBuilder)
+        .usingComparator(caseInsensitiveComparator)
+        .contains("fro").doesNotContain("don");
 
     // StringBuilder have same assertions as String
     StringBuffer stringBuffer = new StringBuffer("Frodo");
-    assertThat(stringBuffer).startsWith("Fro").endsWith("do").hasSize(5);
-    assertThat(stringBuffer).contains("rod").doesNotContain("fro");
-    assertThat(stringBuffer).containsOnlyOnce("do");
-    assertThat(stringBuffer).usingComparator(caseInsensitiveComparator).contains("fro").doesNotContain("don");
+    assertThat(stringBuffer)
+        .startsWith("Fro").endsWith("do").hasSize(5);
+    assertThat(stringBuffer)
+        .contains("rod").doesNotContain("fro");
+    assertThat(stringBuffer)
+        .containsOnlyOnce("do");
+    assertThat(stringBuffer)
+        .usingComparator(caseInsensitiveComparator)
+        .contains("fro").doesNotContain("don");
   }
 
   @Test
@@ -132,7 +157,8 @@ public class StringAssertionsExamples extends AbstractAssertionsExamples {
     // XML String don't need to be formatted, AssertJ will format both actual and expected string before comparison.
     // Whatever how formatted your xml string is, isXmlEqualTo assertion is able to compare it with another xml String.
     String oneLineXml = "<rings><bearer><name>Frodo</name><ring><name>one ring</name><createdBy>Sauron</createdBy></ring></bearer></rings>";
-    assertThat(oneLineXml).isXmlEqualTo(expectedXml);
+    assertThat(oneLineXml)
+        .isXmlEqualTo(expectedXml);
 
     String xmlWithNewLine = "<rings>\n" +
                             "<bearer>   \n" +
@@ -143,11 +169,14 @@ public class StringAssertionsExamples extends AbstractAssertionsExamples {
                             "  </ring>\n" +
                             "</bearer>\n" +
                             "</rings>";
-    assertThat(xmlWithNewLine).isXmlEqualTo(expectedXml); 
-    assertThat(xmlWithNewLine).isXmlEqualTo(oneLineXml);
+    assertThat(xmlWithNewLine)
+        .isXmlEqualTo(expectedXml);
+    assertThat(xmlWithNewLine)
+        .isXmlEqualTo(oneLineXml);
 
     // You can easily compare your XML String to the content of an XML file.
-    assertThat(oneLineXml).isXmlEqualToContentOf(new File("src/test/resources/formatted.xml"));
+    assertThat(oneLineXml)
+        .isXmlEqualToContentOf(new File("src/test/resources/formatted.xml"));
 
     // Since both actual and expected xml string are formatted as XML document, it is easy to see what were the differences.
     // here : bearer is not Sauron but should Frodo !
@@ -166,8 +195,6 @@ public class StringAssertionsExamples extends AbstractAssertionsExamples {
     } catch (AssertionError e) {
       logAssertionErrorMessage("XML string comparison (isXmlEqualTo)", e);
     }
-
   }
-
 
 }

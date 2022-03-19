@@ -16,6 +16,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.assertj.core.internal.Failures;
 
+/**
+ * 堆栈追踪的断言示例。
+ */
 public class StackTraceFilterExample {
 
   public static void main(String[] args) {
@@ -36,4 +39,5 @@ public class StackTraceFilterExample {
       e.printStackTrace();
     }
   }
+
 }
