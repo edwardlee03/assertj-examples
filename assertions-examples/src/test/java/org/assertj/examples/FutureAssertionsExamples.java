@@ -33,30 +33,23 @@ public class FutureAssertionsExamples extends AbstractAssertionsExamples {
 
     ExecutorService executorService = Executors.newSingleThreadExecutor();
 
-    Future<String> future = executorService.submit(new Callable<String>() {
-      @Override
-      public String call() throws Exception {
-        return "done";
-      }
-    });
+    Future<String> future = executorService.submit(() -> "done");
 
     future.get(); // to make sure the future is done
-    assertThat(future).isDone()
-                      .isNotCancelled();
+    assertThat(future)
+        .isDone()
+        .isNotCancelled();
 
-    future = executorService.submit(new Callable<String>() {
-      @Override
-      public String call() throws Exception {
-        Thread.sleep(10000);
-        return "done";
-      }
+    future = executorService.submit(() -> {
+      Thread.sleep(10000);
+      return "done";
     });
 
-    assertThat(future).isNotDone()
-                      .isNotCancelled();
+    assertThat(future)
+        .isNotDone()
+        .isNotCancelled();
     future.cancel(true);
     assertThat(future).isCancelled();
-
   }
 
 }

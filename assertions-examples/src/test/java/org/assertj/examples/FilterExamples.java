@@ -37,6 +37,7 @@ import org.junit.jupiter.api.Test;
  * @author Joel Costigliola
  */
 public class FilterExamples extends AbstractAssertionsExamples {
+
   protected Employee yoda;
   protected Employee obiwan;
   protected Employee luke;
@@ -55,49 +56,66 @@ public class FilterExamples extends AbstractAssertionsExamples {
   @Test
   public void filter_with_examples() {
     // with(property).equalsTo(someValue) works by introspection on specified property
-    assertThat(filter(fellowshipOfTheRing).with("race").equalsTo(HOBBIT).get()).containsOnly(sam, frodo, pippin, merry);
+    assertThat(filter(fellowshipOfTheRing)
+        .with("race")
+        .equalsTo(HOBBIT).get()).containsOnly(sam, frodo, pippin, merry);
     // same thing - shorter way
-    assertThat(filter(fellowshipOfTheRing).with("race", HOBBIT).get()).containsOnly(sam, frodo, pippin, merry);
+    assertThat(filter(fellowshipOfTheRing)
+        .with("race", HOBBIT).get())
+        .containsOnly(sam, frodo, pippin, merry);
     // same thing - even shorter way
-    assertThat(fellowshipOfTheRing).filteredOn("race", HOBBIT)
-                                   .containsOnly(sam, frodo, pippin, merry);
+    assertThat(fellowshipOfTheRing)
+        .filteredOn("race", HOBBIT)
+        .containsOnly(sam, frodo, pippin, merry);
 
     // nested property are supported
-    assertThat(filter(fellowshipOfTheRing).with("race.name").equalsTo("Man").get()).containsOnly(aragorn, boromir);
-    assertThat(fellowshipOfTheRing).filteredOn("race.name", "Man")
-                                   .containsOnly(aragorn, boromir);
+    assertThat(filter(fellowshipOfTheRing)
+        .with("race.name")
+        .equalsTo("Man").get()).containsOnly(aragorn, boromir);
+    assertThat(fellowshipOfTheRing)
+        .filteredOn("race.name", "Man")
+        .containsOnly(aragorn, boromir);
 
     // you can apply different comparison
     assertThat(filter(fellowshipOfTheRing).with("race").notIn(HOBBIT, MAN).get()).containsOnly(gandalf, gimli, legolas);
-    assertThat(fellowshipOfTheRing).filteredOn("race", notIn(HOBBIT, MAN))
-                                   .containsOnly(gandalf, gimli, legolas);
+    assertThat(fellowshipOfTheRing)
+        .filteredOn("race", notIn(HOBBIT, MAN))
+        .containsOnly(gandalf, gimli, legolas);
 
-    assertThat(filter(fellowshipOfTheRing).with("race").in(MAIA, MAN).get()).containsOnly(gandalf, boromir, aragorn);
-    assertThat(fellowshipOfTheRing).filteredOn("race", in(MAIA, MAN))
-                                   .containsOnly(gandalf, boromir, aragorn);
+    assertThat(filter(fellowshipOfTheRing)
+        .with("race").in(MAIA, MAN).get()).containsOnly(gandalf, boromir, aragorn);
+    assertThat(fellowshipOfTheRing)
+        .filteredOn("race", in(MAIA, MAN))
+        .containsOnly(gandalf, boromir, aragorn);
 
-    assertThat(filter(fellowshipOfTheRing).with("race").notEqualsTo(HOBBIT).get()).contains(gandalf, boromir, aragorn,
-                                                                                            gimli, legolas);
-    assertThat(fellowshipOfTheRing).filteredOn("race", not(HOBBIT))
-                                   .containsOnly(gandalf, boromir, aragorn, gimli, legolas);
+    assertThat(filter(fellowshipOfTheRing)
+        .with("race").notEqualsTo(HOBBIT).get()).contains(gandalf, boromir, aragorn,
+        gimli, legolas);
+    assertThat(fellowshipOfTheRing)
+        .filteredOn("race", not(HOBBIT))
+        .containsOnly(gandalf, boromir, aragorn, gimli, legolas);
 
     // you can chain multiple filter criteria
-    assertThat(filter(fellowshipOfTheRing).with("race").equalsTo(MAN).and("name").notEqualsTo("Boromir").get()).contains(aragorn);
-    assertThat(fellowshipOfTheRing).filteredOn("race", MAN)
-                                   .filteredOn("name", not("Boromir"))
-                                   .containsOnly(aragorn);
+    assertThat(filter(fellowshipOfTheRing)
+        .with("race").equalsTo(MAN).and("name").notEqualsTo("Boromir").get()).contains(aragorn);
+    assertThat(fellowshipOfTheRing)
+        .filteredOn("race", MAN)
+        .filteredOn("name", not("Boromir"))
+        .containsOnly(aragorn);
   }
 
   @Test
   public void filter_on_function_example() {
-    assertThat(fellowshipOfTheRing).filteredOn(TolkienCharacter::getRace, HOBBIT)
-                                   .containsOnly(sam, frodo, pippin, merry);
+    assertThat(fellowshipOfTheRing)
+        .filteredOn(TolkienCharacter::getRace, HOBBIT)
+        .containsOnly(sam, frodo, pippin, merry);
   }
 
   @Test
   public void filter_on_assertions_example() {
-    assertThat(fellowshipOfTheRing).filteredOn(TolkienCharacter::getRace, HOBBIT)
-                                   .containsOnly(sam, frodo, pippin, merry);
+    assertThat(fellowshipOfTheRing)
+        .filteredOn(TolkienCharacter::getRace, HOBBIT)
+        .containsOnly(sam, frodo, pippin, merry);
   }
 
   @Test
@@ -107,7 +125,8 @@ public class FilterExamples extends AbstractAssertionsExamples {
       return player.getPointsPerGame() > 20 && (player.getAssistsPerGame() >= 8 || player.getReboundsPerGame() >= 8);
     }, "mvp");
     assertThat(filter(basketBallPlayers).having(mvpStats).get()).containsOnly(rose, james, wade);
-    assertThat(basketBallPlayers).filteredOn(mvpStats).containsOnly(rose, james, wade);
+    assertThat(basketBallPlayers)
+        .filteredOn(mvpStats).containsOnly(rose, james, wade);
 
     // being(condition) example : same condition can be applied but is renamed to be more readable
     Condition<BasketBallPlayer> potentialMvp = mvpStats;
@@ -117,42 +136,52 @@ public class FilterExamples extends AbstractAssertionsExamples {
 
   @Test
   public void iterable_fluent_filter_with_examples() {
-    assertThat(fellowshipOfTheRing).filteredOn("race", HOBBIT)
-                                   .containsOnly(sam, frodo, pippin, merry);
+    assertThat(fellowshipOfTheRing)
+        .filteredOn("race", HOBBIT)
+        .containsOnly(sam, frodo, pippin, merry);
 
     Assertions.setAllowExtractingPrivateFields(true);
-    assertThat(fellowshipOfTheRing).filteredOn("notAccessibleField", notIn(0L))
-                                   .contains(sam, frodo, pippin, merry);
+    assertThat(fellowshipOfTheRing)
+        .filteredOn("notAccessibleField", notIn(0L))
+        .contains(sam, frodo, pippin, merry);
 
     // nested property are supported
-    assertThat(fellowshipOfTheRing).filteredOn("race.name", "Man")
-                                   .containsOnly(aragorn, boromir);
+    assertThat(fellowshipOfTheRing)
+        .filteredOn("race.name", "Man")
+        .containsOnly(aragorn, boromir);
 
     // you can apply different comparison
-    assertThat(fellowshipOfTheRing).filteredOn("race", notIn(HOBBIT, MAN))
-                                   .containsOnly(gandalf, gimli, legolas);
+    assertThat(fellowshipOfTheRing)
+        .filteredOn("race", notIn(HOBBIT, MAN))
+        .containsOnly(gandalf, gimli, legolas);
 
-    assertThat(fellowshipOfTheRing).filteredOn("race", in(MAIA, MAN))
-                                   .containsOnly(gandalf, boromir, aragorn);
+    assertThat(fellowshipOfTheRing)
+        .filteredOn("race", in(MAIA, MAN))
+        .containsOnly(gandalf, boromir, aragorn);
 
-    assertThat(fellowshipOfTheRing).filteredOn("race", not(HOBBIT))
-                                   .containsOnly(gandalf, boromir, aragorn, gimli, legolas);
+    assertThat(fellowshipOfTheRing)
+        .filteredOn("race", not(HOBBIT))
+        .containsOnly(gandalf, boromir, aragorn, gimli, legolas);
 
     // you can chain multiple filter criteria
-    assertThat(fellowshipOfTheRing).filteredOn("race", MAN)
-                                   .filteredOn("name", not("Boromir"))
-                                   .containsOnly(aragorn);
+    assertThat(fellowshipOfTheRing)
+        .filteredOn("race", MAN)
+        .filteredOn("name", not("Boromir"))
+        .containsOnly(aragorn);
 
-    assertThat(fellowshipOfTheRing).filteredOn(character -> character.getName().contains("o"))
-                                   .containsOnly(aragorn, frodo, legolas, boromir);
+    assertThat(fellowshipOfTheRing)
+        .filteredOn(character -> character.getName().contains("o"))
+        .containsOnly(aragorn, frodo, legolas, boromir);
 
-    assertThat(fellowshipOfTheRing).filteredOn(character -> character.getName().contains("o"))
-                                   .containsOnly(aragorn, frodo, legolas, boromir)
-                                   .extracting(character -> character.getRace().getName())
-                                   .contains("Hobbit", "Elf", "Man");
+    assertThat(fellowshipOfTheRing)
+        .filteredOn(character -> character.getName().contains("o"))
+        .containsOnly(aragorn, frodo, legolas, boromir)
+        .extracting(character -> character.getRace().getName())
+        .contains("Hobbit", "Elf", "Man");
 
-    assertThat(fellowshipOfTheRing).filteredOnAssertions(character -> assertThat(character.getName()).contains("o"))
-                                   .containsOnly(aragorn, frodo, legolas, boromir);
+    assertThat(fellowshipOfTheRing)
+        .filteredOnAssertions(character -> assertThat(character.getName()).contains("o"))
+        .containsOnly(aragorn, frodo, legolas, boromir);
 
     // having(condition) example
     Condition<BasketBallPlayer> potentialMvp = new Condition<BasketBallPlayer>() {
@@ -161,14 +190,18 @@ public class FilterExamples extends AbstractAssertionsExamples {
         return player.getPointsPerGame() > 20 && (player.getAssistsPerGame() >= 8 || player.getReboundsPerGame() >= 8);
       }
     };
-    assertThat(basketBallPlayers).filteredOn(potentialMvp).containsOnly(rose, james, wade);
+    assertThat(basketBallPlayers)
+        .filteredOn(potentialMvp).containsOnly(rose, james, wade);
   }
 
   @Test
   public void should_filter_iterable_under_test_on_private_field_values() {
-    assertThat(employees).filteredOn("city", notIn("Paris")).containsOnly(yoda, obiwan, luke, noname);
-    assertThat(employees).filteredOn("city", notIn("New York")).isEmpty();
-    assertThat(employees).filteredOn("city", notIn("New York", "Paris")).isEmpty();
+    assertThat(employees).filteredOn("city", notIn("Paris"))
+        .containsOnly(yoda, obiwan, luke, noname);
+    assertThat(employees).filteredOn("city", notIn("New York"))
+        .isEmpty();
+    assertThat(employees).filteredOn("city", notIn("New York", "Paris"))
+        .isEmpty();
   }
 
 }

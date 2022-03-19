@@ -70,10 +70,10 @@ public class FileAssertionsExamples extends AbstractAssertionsExamples {
 
     File xFileWithExtension = writeFile("xFile.secret", "The Truth Is Out There");
     assertThat(xFileWithExtension)
-                                  .hasParent("target")
-                                  .hasParent(new File("target"))
-                                  .hasExtension("secret")
-                                  .hasName("xFile.secret");
+        .hasParent("target")
+        .hasParent(new File("target"))
+        .hasExtension("secret")
+        .hasName("xFile.secret");
 
     assertThat(new File("/")).hasNoParent();
   }
@@ -110,7 +110,8 @@ public class FileAssertionsExamples extends AbstractAssertionsExamples {
 
   @Test
   public void stream_assertions_examples() throws Exception {
-    assertThat(byteArrayInputStreamFrom("string")).hasSameContentAs(byteArrayInputStreamFrom("string"));
+    assertThat(byteArrayInputStreamFrom("string"))
+        .hasSameContentAs(byteArrayInputStreamFrom("string"));
   }
 
   @Test
@@ -136,41 +137,45 @@ public class FileAssertionsExamples extends AbstractAssertionsExamples {
   public void should_check_digests() throws Exception {
     // GIVEN
     File tested = new File("src/test/resources/assertj-core-2.9.0.jar");
-    byte[] md5Bytes = new byte[] { -36, -77, 1, 92, -46, -124, 71, 100, 76, -127, 10, -13, 82, -125, 44, 25 };
-    byte[] sha1Bytes = new byte[] { 92, 90, -28, 91, 88, -15, 32, 35, -127, 122, -66, 73, 36, 71, -51, -57, -111, 44,
-        26, 44 };
+    byte[] md5Bytes = new byte[]{-36, -77, 1, 92, -46, -124, 71, 100, 76, -127, 10, -13, 82, -125, 44, 25};
+    byte[] sha1Bytes = new byte[]{92, 90, -28, 91, 88, -15, 32, 35, -127, 122, -66, 73, 36, 71, -51, -57, -111, 44,
+        26, 44};
     // THEN
-    assertThat(tested).hasDigest("SHA1", "5c5ae45b58f12023817abe492447cdc7912c1a2c")
-                      .hasDigest(MessageDigest.getInstance("SHA1"), "5c5ae45b58f12023817abe492447cdc7912c1a2c")
-                      .hasDigest("SHA1", sha1Bytes)
-                      .hasDigest(MessageDigest.getInstance("SHA1"), sha1Bytes)
-                      .hasDigest("MD5", "dcb3015cd28447644c810af352832c19")
-                      .hasDigest(MessageDigest.getInstance("MD5"), "dcb3015cd28447644c810af352832c19")
-                      .hasDigest("MD5", md5Bytes)
-                      .hasDigest(MessageDigest.getInstance("MD5"), md5Bytes);
+    assertThat(tested)
+        .hasDigest("SHA1", "5c5ae45b58f12023817abe492447cdc7912c1a2c")
+        .hasDigest(MessageDigest.getInstance("SHA1"), "5c5ae45b58f12023817abe492447cdc7912c1a2c")
+        .hasDigest("SHA1", sha1Bytes)
+        .hasDigest(MessageDigest.getInstance("SHA1"), sha1Bytes)
+        .hasDigest("MD5", "dcb3015cd28447644c810af352832c19")
+        .hasDigest(MessageDigest.getInstance("MD5"), "dcb3015cd28447644c810af352832c19")
+        .hasDigest("MD5", md5Bytes)
+        .hasDigest(MessageDigest.getInstance("MD5"), md5Bytes);
 
   }
 
   @Test
   public void directory_assertions() {
     File directory = new File("src/test/resources/templates");
-    assertThat(directory).isNotEmptyDirectory()
-                         .isDirectoryContaining("regex:.*txt")
-                         .isDirectoryContaining("glob:**.txt")
-                         .isDirectoryContaining(file -> file.getName().contains("template"))
-                         .isDirectoryNotContaining("glob:**.java")
-                         .isDirectoryNotContaining("regex:.*java")
-                         .isDirectoryNotContaining(file -> file.getName().endsWith("java"));
+    assertThat(directory)
+        .isNotEmptyDirectory()
+        .isDirectoryContaining("regex:.*txt")
+        .isDirectoryContaining("glob:**.txt")
+        .isDirectoryContaining(file -> file.getName().contains("template"))
+        .isDirectoryNotContaining("glob:**.java")
+        .isDirectoryNotContaining("regex:.*java")
+        .isDirectoryNotContaining(file -> file.getName().endsWith("java"));
 
     Path emptyDirectory = Paths.get("src/test/resources/empty");
-    assertThat(emptyDirectory).isEmptyDirectory();
+    assertThat(emptyDirectory)
+        .isEmptyDirectory();
 
     // recursive examples
     File resourcesDirectory = new File("src/test/resources");
-    assertThat(resourcesDirectory).isDirectoryRecursivelyContaining(file -> file.getName().contains("template"))
-                                  .isDirectoryRecursivelyContaining(file -> file.getName().contains("services"))
-                                  .isDirectoryRecursivelyContaining("regex:.*txt")
-                                  .isDirectoryRecursivelyContaining("glob:**.txt");
+    assertThat(resourcesDirectory)
+        .isDirectoryRecursivelyContaining(file -> file.getName().contains("template"))
+        .isDirectoryRecursivelyContaining(file -> file.getName().contains("services"))
+        .isDirectoryRecursivelyContaining("regex:.*txt")
+        .isDirectoryRecursivelyContaining("glob:**.txt");
   }
 
   // helper methods

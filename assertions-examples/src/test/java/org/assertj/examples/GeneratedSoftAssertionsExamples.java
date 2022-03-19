@@ -42,4 +42,5 @@ public class GeneratedSoftAssertionsExamples extends AbstractAssertionsExamples 
       logAssertionErrorMessage("GeneratedSoftAssertions errors example", e);
     }
   }
+
 }

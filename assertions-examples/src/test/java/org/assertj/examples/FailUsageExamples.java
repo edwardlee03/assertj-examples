@@ -54,4 +54,5 @@ public class FailUsageExamples extends AbstractAssertionsExamples {
                    .hasMessageContaining("9");
     }
   }
+
 }
