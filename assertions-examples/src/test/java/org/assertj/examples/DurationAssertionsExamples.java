@@ -19,24 +19,37 @@ import java.time.Duration;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * 持续时间的断言示例。
+ */
 public class DurationAssertionsExamples {
 
   @Test
   public void duration_assertions_examples() {
-    assertThat(Duration.ofDays(5)).hasDays(5);
-    assertThat(Duration.ofHours(15)).hasHours(15);
+    assertThat(Duration.ofDays(5))
+        .hasDays(5);
+    assertThat(Duration.ofHours(15))
+        .hasHours(15);
 
-    assertThat(Duration.ofMinutes(65)).hasMinutes(65);
-    assertThat(Duration.ofSeconds(250)).hasSeconds(250);
+    assertThat(Duration.ofMinutes(65))
+        .hasMinutes(65);
+    assertThat(Duration.ofSeconds(250))
+        .hasSeconds(250);
 
-    assertThat(Duration.ofMillis(250)).hasMillis(250);
-    assertThat(Duration.ofNanos(145)).hasNanos(145);
+    assertThat(Duration.ofMillis(250))
+        .hasMillis(250);
+    assertThat(Duration.ofNanos(145))
+        .hasNanos(145);
 
-    assertThat(Duration.ofHours(5)).isPositive();
-    assertThat(Duration.ofMinutes(-15)).isNegative();
-    assertThat(Duration.ZERO).isZero();
+    assertThat(Duration.ofHours(5))
+        .isPositive();
+    assertThat(Duration.ofMinutes(-15))
+        .isNegative();
+    assertThat(Duration.ZERO)
+        .isZero();
 
-    assertThat(Duration.ofMinutes(15)).isCloseTo(Duration.ofMinutes(10), withMarginOf(Duration.ofMinutes(5)));
+    assertThat(Duration.ofMinutes(15))
+        .isCloseTo(Duration.ofMinutes(10), withMarginOf(Duration.ofMinutes(5)));
   }
 
 }
