@@ -20,6 +20,7 @@ import org.assertj.core.api.Assertions;
 
 /**
  * Exception assertions examples.
+ * 异常的断言示例。
  * 
  * @author Joel Costigliola
  */
@@ -27,26 +28,35 @@ public class ExceptionAssertionsExamples extends AbstractAssertionsExamples {
 
   @Test
   public void exceptions_assertions_examples() {
-    assertThat(fellowshipOfTheRing).hasSize(9);
+    assertThat(fellowshipOfTheRing)
+        .hasSize(9);
     try {
       fellowshipOfTheRing.get(9); // argggl !
     } catch (Exception e) {
       // you can check exception type
-      assertThat(e).isInstanceOf(IndexOutOfBoundsException.class);
+      assertThat(e)
+          .isInstanceOf(IndexOutOfBoundsException.class);
 
       // you can check if exception nas no cause
-      assertThat(e).hasNoCause();
+      assertThat(e)
+          .hasNoCause();
 
       // you can check exception message
-      assertThat(e).hasMessage("Index: 9, Size: 9");
+      assertThat(e)
+          .hasMessage("Index: 9, Size: 9");
 
       // sometimes message are not entirely predictible, you can then check for start, end or containing string.
-      assertThat(e).hasMessageStartingWith("Index: 9").hasMessageContaining("9").hasMessageEndingWith("Size: 9");
+      assertThat(e).hasMessageStartingWith("Index: 9")
+          .hasMessageContaining("9").hasMessageEndingWith("Size: 9");
       // this equivalent to (unless for error message which is more explicit in assertThat(e).hasMessageXXX)
-      assertThat(e.getMessage()).startsWith("Index: 9").contains("9").endsWith("Size: 9");
+      assertThat(e.getMessage()).startsWith("Index: 9")
+          .contains("9").endsWith("Size: 9");
     }
   }
 
+  /**
+   * 堆栈跟踪过滤。
+   */
   @Test
   public void stack_trace_filtering() {
     // stack trace filtering is handy for Eclipse integration, because when a test fails Eclipse JUnit view
@@ -156,19 +166,26 @@ public class ExceptionAssertionsExamples extends AbstractAssertionsExamples {
   // at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
   // at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
 
+  /**
+   * 异常原因。
+   */
   @Test
-  public void exception_cause_assertion_examples() throws Exception {
+  public void exception_cause_assertion_examples() {
 
     Throwable throwable = new Throwable(new NullPointerException());
 
     // hasCauseInstanceOf will match inheritance.
-    assertThat(throwable).hasCauseInstanceOf(NullPointerException.class);
-    assertThat(throwable).hasCauseInstanceOf(RuntimeException.class);
+    assertThat(throwable)
+        .hasCauseInstanceOf(NullPointerException.class);
+    assertThat(throwable)
+        .hasCauseInstanceOf(RuntimeException.class);
 
     // hasCauseExactlyInstanceOf will match only exact same type
-    assertThat(throwable).hasCauseExactlyInstanceOf(NullPointerException.class);
+    assertThat(throwable)
+        .hasCauseExactlyInstanceOf(NullPointerException.class);
     try {
-      assertThat(throwable).hasCauseExactlyInstanceOf(RuntimeException.class);
+      assertThat(throwable)
+          .hasCauseExactlyInstanceOf(RuntimeException.class);
     } catch (AssertionError e) {
       logAssertionErrorMessage("hasCauseExactlyInstanceOf", e);
     }
@@ -176,10 +193,14 @@ public class ExceptionAssertionsExamples extends AbstractAssertionsExamples {
     Throwable throwable_root = new Throwable(new IllegalStateException(new NullPointerException()));
 
     // hasRootCauseInstanceOf will match inheritance
-    assertThat(throwable_root).hasRootCauseInstanceOf(NullPointerException.class);
-    assertThat(throwable_root).hasRootCauseInstanceOf(RuntimeException.class);
+    assertThat(throwable_root)
+        .hasRootCauseInstanceOf(NullPointerException.class);
+    assertThat(throwable_root)
+        .hasRootCauseInstanceOf(RuntimeException.class);
 
     // hasRootCauseExactlyInstanceOf will match only exact same type
-    assertThat(throwable_root).hasRootCauseExactlyInstanceOf(NullPointerException.class);
+    assertThat(throwable_root)
+        .hasRootCauseExactlyInstanceOf(NullPointerException.class);
   }
+
 }
