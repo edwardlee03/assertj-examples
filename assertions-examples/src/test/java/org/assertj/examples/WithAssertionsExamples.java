@@ -17,7 +17,8 @@ import static org.assertj.examples.data.Race.HOBBIT;
 import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.Test;
 
-public class WithAssertionsExamples extends AbstractAssertionsExamples implements WithAssertions {
+public class WithAssertionsExamples extends AbstractAssertionsExamples
+    implements WithAssertions {
 
   // the data used are initialized in AbstractAssertionsExamples.
 
@@ -31,8 +32,10 @@ public class WithAssertionsExamples extends AbstractAssertionsExamples implement
     assertThat(frodo).isIn(sam, frodo, pippin);
     assertThat(sauron).isNotIn(fellowshipOfTheRing);
 
-    assertThat(frodo).matches(p -> p.age > 30 && p.getRace() == HOBBIT);
-    assertThat(frodo.age).matches(p -> p > 30);
+    assertThat(frodo)
+        .matches(p -> p.age > 30 && p.getRace() == HOBBIT);
+    assertThat(frodo.age)
+        .matches(p -> p > 30);
   }
 
 }

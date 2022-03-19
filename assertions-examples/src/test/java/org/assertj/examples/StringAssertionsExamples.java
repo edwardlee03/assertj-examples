@@ -33,21 +33,23 @@ public class StringAssertionsExamples extends AbstractAssertionsExamples {
 
   @Test
   public void string_assertions_examples() {
-    assertThat("Frodo").startsWith("Fro")
-                       .endsWith("do")
-                       .hasSize(5).contains("rod")
-                       .doesNotContain("fro")
-                       .doesNotContainIgnoringCase("froo")
-                       .containsOnlyOnce("do")
-                       .isSubstringOf("Frodon")
-                       .doesNotContainAnyWhitespaces();
+    assertThat("Frodo")
+        .startsWith("Fro")
+        .endsWith("do")
+        .hasSize(5).contains("rod")
+        .doesNotContain("fro")
+        .doesNotContainIgnoringCase("froo")
+        .containsOnlyOnce("do")
+        .isSubstringOf("Frodon")
+        .doesNotContainAnyWhitespaces();
     try {
       assertThat("Frodo").containsOnlyOnce("o");
     } catch (AssertionError e) {
       logAssertionErrorMessage("String containsOnlyOnce", e);
     }
     // contains accepts multiple String to avoid chaining contains several times.
-    assertThat("Gandalf the grey").contains("alf", "grey");
+    assertThat("Gandalf the grey")
+        .contains("alf", "grey");
     try {
       assertThat("Gandalf the grey").contains("alf", "grey", "wizard", "ring");
     } catch (AssertionError e) {
@@ -56,15 +58,17 @@ public class StringAssertionsExamples extends AbstractAssertionsExamples {
 
     String bookDescription = "{ 'title':'A Game of Thrones', 'author':'George Martin'}";
 
-    assertThat(bookDescription).containsSequence("'title'", ":", "'A Game of Thrones'")
-                               .containsSequence(asList("'title'", ":", "'A Game of Thrones'"))
-                               .containsSequence("George", " ", "Martin");
+    assertThat(bookDescription)
+        .containsSequence("'title'", ":", "'A Game of Thrones'")
+        .containsSequence(asList("'title'", ":", "'A Game of Thrones'"))
+        .containsSequence("George", " ", "Martin");
 
-    assertThat(bookDescription).containsSubsequence("'title'", ":", "'A Game of Thrones'")
-                               .containsSubsequence("{", "A Game of Thrones", "George Martin", "}")
-                               .containsSubsequence("{", "title", "A Game of Thrones", "}")
-                               .containsSubsequence(asList("{", "title", "A Game of Thrones", "}"))
-                               .containsSubsequence("A", "Game", "of", "George");
+    assertThat(bookDescription)
+        .containsSubsequence("'title'", ":", "'A Game of Thrones'")
+        .containsSubsequence("{", "A Game of Thrones", "George Martin", "}")
+        .containsSubsequence("{", "title", "A Game of Thrones", "}")
+        .containsSubsequence(asList("{", "title", "A Game of Thrones", "}"))
+        .containsSubsequence("A", "Game", "of", "George");
 
     try {
       assertThat(bookDescription).containsSubsequence(":", "'title'", "'A Game of Thrones'");
@@ -72,21 +76,26 @@ public class StringAssertionsExamples extends AbstractAssertionsExamples {
       logAssertionErrorMessage("String containsSequence with incorrect order", e);
     }
 
-    assertThat("a-b-c").containsSubsequence("b", "-", "c")
-                       .containsSubsequence("a", "c")
-                       .containsSubsequence("b", "c")
-                       .containsSubsequence("-", "-")
-                       .containsSubsequence("-", "b", "-")
-                       .containsSubsequence("-", "c");
+    assertThat("a-b-c")
+        .containsSubsequence("b", "-", "c")
+        .containsSubsequence("a", "c")
+        .containsSubsequence("b", "c")
+        .containsSubsequence("-", "-")
+        .containsSubsequence("-", "b", "-")
+        .containsSubsequence("-", "c");
 
     // you can ignore case for equals check
-    assertThat("Frodo").isEqualToIgnoringCase("FROdO").hasSameSizeAs("12345");
-    assertThat("Frodo".length()).isGreaterThan("Sam".length());
+    assertThat("Frodo")
+        .isEqualToIgnoringCase("FROdO").hasSameSizeAs("12345");
+    assertThat("Frodo".length())
+        .isGreaterThan("Sam".length());
 
     // using regex
-    assertThat("Frodo").matches("..o.o").doesNotMatch(".*d");
+    assertThat("Frodo")
+        .matches("..o.o").doesNotMatch(".*d");
 
-    assertThat("Element1 Element2").contains("Element2", "Element1");
+    assertThat("Element1 Element2")
+        .contains("Element2", "Element1");
 
     // check for empty string, or not.
     assertThat("").isEmpty();
@@ -94,13 +103,15 @@ public class StringAssertionsExamples extends AbstractAssertionsExamples {
     assertThat("not empty").isNotEmpty();
 
     // check size.
-    assertThat("C-3PO").hasSameSizeAs("R2-D2").hasSize(5);
+    assertThat("C-3PO")
+        .hasSameSizeAs("R2-D2").hasSize(5);
 
     assertThat("3210").containsOnlyDigits();
 
     //
-    assertThat("Frodo").doesNotStartWith("fro")
-                       .doesNotEndWith("don");
+    assertThat("Frodo")
+        .doesNotStartWith("fro")
+        .doesNotEndWith("don");
   }
 
   @Test
@@ -108,11 +119,14 @@ public class StringAssertionsExamples extends AbstractAssertionsExamples {
 
     // standard assertion are based on equals() method, but what if you want to ignore String case ?
     // one way is to use isEqualToIgnoringCase
-    assertThat("Frodo").isEqualToIgnoringCase("FROdO");
+    assertThat("Frodo")
+        .isEqualToIgnoringCase("FROdO");
     // this is good but it doest not work with the other assertions : contains, startsWith, ...
     // if you want consistent ignoring case comparison, you must use a case iNsenSiTIve comparison strategy :
     // We see that assertions succeeds even though case is not the same - ok that was the point ;-)
-    assertThat("Frodo").usingComparator(caseInsensitiveStringComparator).startsWith("fr").endsWith("ODO");
+    assertThat("Frodo")
+        .usingComparator(caseInsensitiveStringComparator)
+        .startsWith("fr").endsWith("ODO");
 
     // All assertions made after usingComparator(caseInsensitiveStringComparator) are based on the given comparator ...
     assertThat("Frodo").usingComparator(caseInsensitiveStringComparator).contains("fro").doesNotContain("don");
@@ -143,7 +157,9 @@ public class StringAssertionsExamples extends AbstractAssertionsExamples {
         return s1.toString().toLowerCase().compareTo(s2.toString().toLowerCase());
       }
     };
-    assertThat(stringBuilder).usingComparator(caseInsensitiveComparator).contains("fro").doesNotContain("don");
+    assertThat(stringBuilder)
+        .usingComparator(caseInsensitiveComparator)
+        .contains("fro").doesNotContain("don");
 
     // StringBuilder have same assertions as String
     StringBuffer stringBuffer = new StringBuffer("Frodo");
@@ -170,7 +186,8 @@ public class StringAssertionsExamples extends AbstractAssertionsExamples {
     // XML String don't need to be formatted, AssertJ will format both actual and expected string before comparison.
     // Whatever how formatted your xml string is, isXmlEqualTo assertion is able to compare it with another xml String.
     String oneLineXml = "<rings><bearer><name>Frodo</name><ring><name>one ring</name><createdBy>Sauron</createdBy></ring></bearer></rings>";
-    assertThat(oneLineXml).isXmlEqualTo(expectedXml);
+    assertThat(oneLineXml)
+        .isXmlEqualTo(expectedXml);
 
     String xmlWithNewLine = "<rings>\n" +
                             "<bearer>   \n" +
@@ -229,42 +246,48 @@ public class StringAssertionsExamples extends AbstractAssertionsExamples {
   @Test
   public void switch_to_String_assertion() {
     Object title = "Game of Thrones";
-    assertThat(title).asString().endsWith("ones");
+    assertThat(title)
+        .asString().endsWith("ones");
   }
 
   @Test
   public void pattern_assertion_example() {
-    assertThat("Frodo").containsPattern("Fr.d")
-                       .containsPattern(Pattern.compile("Fr.d"));
+    assertThat("Frodo")
+        .containsPattern("Fr.d")
+        .containsPattern(Pattern.compile("Fr.d"));
 
-    assertThat("Frodo").doesNotContainPattern("Fr.ud")
-                       .doesNotContainPattern(Pattern.compile("Fr.ud"));
+    assertThat("Frodo")
+        .doesNotContainPattern("Fr.ud")
+        .doesNotContainPattern(Pattern.compile("Fr.ud"));
   }
 
   @Test
   public void normalizing_newlines_equals_assertion() {
-    assertThat("Game of Thrones\r\n").isEqualToNormalizingNewlines("Game of Thrones\n");
+    assertThat("Game of Thrones\r\n")
+        .isEqualToNormalizingNewlines("Game of Thrones\n");
   }
 
   @Test
   public void ignoring_whitespaces_equals_assertion() {
-    assertThat("Game of Thrones").isEqualToIgnoringWhitespace("Game   of   Thrones")
-                                 .isEqualToIgnoringWhitespace("  Game of   Thrones  ")
-                                 .isEqualToIgnoringWhitespace("  Game of Thrones  ")
-                                 .isEqualToIgnoringWhitespace("Gameof      Thrones")
-                                 .isEqualToIgnoringWhitespace("Game of\tThrones")
-                                 .isEqualToIgnoringWhitespace("GameofThrones");
+    assertThat("Game of Thrones")
+        .isEqualToIgnoringWhitespace("Game   of   Thrones")
+        .isEqualToIgnoringWhitespace("  Game of   Thrones  ")
+        .isEqualToIgnoringWhitespace("  Game of Thrones  ")
+        .isEqualToIgnoringWhitespace("Gameof      Thrones")
+        .isEqualToIgnoringWhitespace("Game of\tThrones")
+        .isEqualToIgnoringWhitespace("GameofThrones");
   }
 
   @Test
   public void normalizing_whitespaces_equals_assertion() {
-    assertThat("Game of Thrones").isEqualToNormalizingWhitespace("Game   of   Thrones")
-                                 .isEqualToNormalizingWhitespace("Game of     Thrones")
-                                 .isEqualToNormalizingWhitespace("Game     of Thrones")
-                                 .isEqualToNormalizingWhitespace("  Game of Thrones  ")
-                                 .isEqualToNormalizingWhitespace("  Game of   Thrones  ")
-                                 .isEqualToNormalizingWhitespace("Game of\tThrones")
-                                 .isEqualToNormalizingWhitespace("Game of Thrones");
+    assertThat("Game of Thrones")
+        .isEqualToNormalizingWhitespace("Game   of   Thrones")
+        .isEqualToNormalizingWhitespace("Game of     Thrones")
+        .isEqualToNormalizingWhitespace("Game     of Thrones")
+        .isEqualToNormalizingWhitespace("  Game of Thrones  ")
+        .isEqualToNormalizingWhitespace("  Game of   Thrones  ")
+        .isEqualToNormalizingWhitespace("Game of\tThrones")
+        .isEqualToNormalizingWhitespace("Game of Thrones");
   }
 
   @Test
@@ -285,60 +308,72 @@ public class StringAssertionsExamples extends AbstractAssertionsExamples {
 
   @Test
   public void ignoring_newlines_equals_assertion() {
-    assertThat("Game of Thrones").isEqualToIgnoringNewLines("Game of Thrones\n")
-                                 .isEqualToIgnoringNewLines("Game of Thrones\r\n")
-                                 .isEqualToIgnoringNewLines("Game of Thrones\r\n\n");
-    assertThat("Game of\n Thrones").isEqualToIgnoringNewLines("Game of Thrones\n")
-                                   .isEqualToIgnoringNewLines("Game of \n\n\nThrones\r\n")
-                                   .isEqualToIgnoringNewLines("Game of Thrones");
+    assertThat("Game of Thrones")
+        .isEqualToIgnoringNewLines("Game of Thrones\n")
+        .isEqualToIgnoringNewLines("Game of Thrones\r\n")
+        .isEqualToIgnoringNewLines("Game of Thrones\r\n\n");
+    assertThat("Game of\n Thrones")
+        .isEqualToIgnoringNewLines("Game of Thrones\n")
+        .isEqualToIgnoringNewLines("Game of \n\n\nThrones\r\n")
+        .isEqualToIgnoringNewLines("Game of Thrones");
   }
 
   @Test
   public void should_support_comparable_assertions() {
-    assertThat("ab").isBetween("aa", "ac");
+    assertThat("ab")
+        .isBetween("aa", "ac");
 
-    assertThat("abc").isLessThan("bcd")
-                     .isLessThan("b")
-                     .isLessThan("abca")
-                     .usingComparator(caseInsensitiveStringComparator)
-                     .isLessThan("BCD");
+    assertThat("abc")
+        .isLessThan("bcd")
+        .isLessThan("b")
+        .isLessThan("abca")
+        .usingComparator(caseInsensitiveStringComparator)
+        .isLessThan("BCD");
 
-    assertThat("abc").isLessThanOrEqualTo("bcd")
-                     .isLessThanOrEqualTo("abc")
-                     .isLessThanOrEqualTo("b")
-                     .isLessThanOrEqualTo("abca")
-                     .usingComparator(caseInsensitiveStringComparator)
-                     .isLessThanOrEqualTo("ABC");
+    assertThat("abc")
+        .isLessThanOrEqualTo("bcd")
+        .isLessThanOrEqualTo("abc")
+        .isLessThanOrEqualTo("b")
+        .isLessThanOrEqualTo("abca")
+        .usingComparator(caseInsensitiveStringComparator)
+        .isLessThanOrEqualTo("ABC");
 
-    assertThat("xyz").isGreaterThan("abc")
-                     .isGreaterThan("xy")
-                     .isGreaterThan("ABC");
-    assertThat("XYZ").usingComparator(caseInsensitiveStringComparator)
-                     .isGreaterThan("abc");
+    assertThat("xyz")
+        .isGreaterThan("abc")
+        .isGreaterThan("xy")
+        .isGreaterThan("ABC");
+    assertThat("XYZ")
+        .usingComparator(caseInsensitiveStringComparator)
+        .isGreaterThan("abc");
 
-    assertThat("xyz").isGreaterThanOrEqualTo("abc")
-                     .isGreaterThanOrEqualTo("xyz")
-                     .isGreaterThanOrEqualTo("xy")
-                     .isGreaterThanOrEqualTo("ABC");
-    assertThat("XYZ").usingComparator(caseInsensitiveStringComparator)
-                     .isGreaterThanOrEqualTo("abc");
+    assertThat("xyz")
+        .isGreaterThanOrEqualTo("abc")
+        .isGreaterThanOrEqualTo("xyz")
+        .isGreaterThanOrEqualTo("xy")
+        .isGreaterThanOrEqualTo("ABC");
+    assertThat("XYZ")
+        .usingComparator(caseInsensitiveStringComparator)
+        .isGreaterThanOrEqualTo("abc");
 
-    assertThat("ab").isBetween("aa", "ac")
-                    .isBetween("ab", "ac")
-                    .isBetween("aa", "ab")
-                    .isBetween("ab", "ab")
-                    .isBetween("a", "c")
-                    .usingComparator(caseInsensitiveStringComparator)
-                    .isBetween("AA", "AC");
+    assertThat("ab")
+        .isBetween("aa", "ac")
+        .isBetween("ab", "ac")
+        .isBetween("aa", "ab")
+        .isBetween("ab", "ab")
+        .isBetween("a", "c")
+        .usingComparator(caseInsensitiveStringComparator)
+        .isBetween("AA", "AC");
 
-    assertThat("ab").isStrictlyBetween("aa", "ac")
-                    .isStrictlyBetween("a", "c")
-                    .usingComparator(caseInsensitiveStringComparator)
-                    .isStrictlyBetween("AA", "AC");
+    assertThat("ab")
+        .isStrictlyBetween("aa", "ac")
+        .isStrictlyBetween("a", "c")
+        .usingComparator(caseInsensitiveStringComparator)
+        .isStrictlyBetween("AA", "AC");
 
-    assertThat("abc").usingComparator(caseInsensitiveStringComparator, "String case insensitive comparator")
-                     .isEqualTo("Abc")
-                     .isEqualTo("ABC");
+    assertThat("abc")
+        .usingComparator(caseInsensitiveStringComparator, "String case insensitive comparator")
+        .isEqualTo("Abc")
+        .isEqualTo("ABC");
   }
 
 }

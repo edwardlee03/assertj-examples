@@ -25,17 +25,20 @@ public class UriAssertionsExamples extends AbstractAssertionsExamples {
 
   @Test
   public void uri_assertions_examples() throws URISyntaxException {
-    assertThat(new URI("http://assertj.org:8080/news.html#print")).hasHost("assertj.org")
-                                                                  .hasPort(8080)
-                                                                  .hasPath("/news.html")
-                                                                  .hasFragment("print");
-    assertThat(new URI("http://assertj.org")).hasNoFragment()
-                                             .hasNoPort()
-                                             .hasPath("")
-                                             .hasNoQuery()
-                                             .hasNoUserInfo();
+    assertThat(new URI("http://assertj.org:8080/news.html#print"))
+        .hasHost("assertj.org")
+        .hasPort(8080)
+        .hasPath("/news.html")
+        .hasFragment("print");
+    assertThat(new URI("http://assertj.org"))
+        .hasNoFragment()
+        .hasNoPort()
+        .hasPath("")
+        .hasNoQuery()
+        .hasNoUserInfo();
 
-    assertThat(new URI("mailto:java-net@java.sun.com")).hasNoPath();
+    assertThat(new URI("mailto:java-net@java.sun.com"))
+        .hasNoPath();
 
     // These assertions succeed:
     assertThat(new URI("http://test:pass@www.helloworld.org/index.html")).hasUserInfo("test:pass");
@@ -44,34 +47,46 @@ public class UriAssertionsExamples extends AbstractAssertionsExamples {
 
     // These assertions fail:
     // This assertion succeeds:
-    assertThat(new URI("http://www.helloworld.org/index.html")).hasNoUserInfo();
+    assertThat(new URI("http://www.helloworld.org/index.html"))
+        .hasNoUserInfo();
 
     // This assertion fails:
     // assertThat(new URI("http://test:pass@www.helloworld.org/index.html")).hasNoUserInfo();
 
-    assertThat(new URI("http://www.helloworld.org/index.html?happy")).hasParameter("happy");
-    assertThat(new URI("http://www.helloworld.org/index.html?happy=very")).hasParameter("happy");
-    assertThat(new URI("http://www.helloworld.org/index.html?happy")).hasParameter("happy", null);
-    assertThat(new URI("http://www.helloworld.org/index.html?happy=very")).hasParameter("happy", "very");
+    assertThat(new URI("http://www.helloworld.org/index.html?happy"))
+        .hasParameter("happy");
+    assertThat(new URI("http://www.helloworld.org/index.html?happy=very"))
+        .hasParameter("happy");
+    assertThat(new URI("http://www.helloworld.org/index.html?happy"))
+        .hasParameter("happy", null);
+    assertThat(new URI("http://www.helloworld.org/index.html?happy=very"))
+        .hasParameter("happy", "very");
 
-    assertThat(new URI("http://www.helloworld.org/index.html")).hasNoParameters();
-    assertThat(new URI("http://www.helloworld.org/index.html")).hasNoParameter("happy");
-    assertThat(new URI("http://www.helloworld.org/index.html")).hasNoParameter("happy", "very");
-    assertThat(new URI("http://www.helloworld.org/index.html?happy")).hasNoParameter("happy", "very");
-    assertThat(new URI("http://www.helloworld.org/index.html?happy=very")).hasNoParameter("happy", null);
+    assertThat(new URI("http://www.helloworld.org/index.html"))
+        .hasNoParameters();
+    assertThat(new URI("http://www.helloworld.org/index.html"))
+        .hasNoParameter("happy");
+    assertThat(new URI("http://www.helloworld.org/index.html"))
+        .hasNoParameter("happy", "very");
+    assertThat(new URI("http://www.helloworld.org/index.html?happy"))
+        .hasNoParameter("happy", "very");
+    assertThat(new URI("http://www.helloworld.org/index.html?happy=very"))
+        .hasNoParameter("happy", null);
   }
 
   @Test
   public void url_assertions_examples() throws MalformedURLException {
-    assertThat(new URL("http://assertj.org:8080/news.html#print")).hasHost("assertj.org")
-                                                                  .hasPort(8080)
-                                                                  .hasPath("/news.html")
-                                                                  .hasAnchor("print");
-    assertThat(new URL("http://assertj.org")).hasNoAnchor()
-                                             .hasNoPath()
-                                             .hasNoPort()
-                                             .hasNoQuery()
-                                             .hasNoUserInfo();
+    assertThat(new URL("http://assertj.org:8080/news.html#print"))
+        .hasHost("assertj.org")
+        .hasPort(8080)
+        .hasPath("/news.html")
+        .hasAnchor("print");
+    assertThat(new URL("http://assertj.org"))
+        .hasNoAnchor()
+        .hasNoPath()
+        .hasNoPort()
+        .hasNoQuery()
+        .hasNoUserInfo();
 
     assertThat(new URL("http://helloworld.org")).hasAuthority("helloworld.org");
 

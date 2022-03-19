@@ -14,6 +14,9 @@ package org.assertj.examples;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ * 错误上的线程转储的断言示例。
+ */
 public class ThreadDumpOnErrorExample {
 
   public static void main(String[] args) {
@@ -25,6 +28,8 @@ public class ThreadDumpOnErrorExample {
       e.printStackTrace();
     }
     System.err.println("\n\n--------------- thread dump on error -----------------");
-    assertThat("Messi").withThreadDumpOnError().isEqualTo("Ronaldo");
+    assertThat("Messi")
+        .withThreadDumpOnError()
+        .isEqualTo("Ronaldo");
   }
 }
