@@ -19,9 +19,9 @@ import org.junit.Test;
 
 import com.google.common.base.Optional;
 
-
 /**
  * {@link Optional} assertions example.
+ * 可选值容器的断言示例。
  * 
  * @author Joel Costigliola
  */
@@ -57,5 +57,5 @@ public class OptionalAssertionsExamples extends AbstractAssertionsExamples {
       logAssertionErrorMessage("OptionalAssert.isAbsent", e);
     }
   }
-  
+
 }

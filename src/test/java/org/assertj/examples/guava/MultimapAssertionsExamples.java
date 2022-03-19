@@ -23,9 +23,9 @@ import org.junit.Test;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 
-
 /**
  * {@link Multimap} assertions example.
+ * 多重映射关系的断言示例。
  * 
  * @author Joel Costigliola
  */
