@@ -55,12 +55,15 @@ public class BasicAssertionsExamples extends AbstractAssertionsExamples {
   @Test
   public void isEqualTo_isNotEqualTo_assertions_examples() {
     // the most simple assertion
-    assertThat(frodo.age).isEqualTo(33);
-    assertThat(frodo.getName()).isEqualTo("Frodo").isNotEqualTo("Frodon");
+    assertThat(frodo.age)
+        .isEqualTo(33);
+    assertThat(frodo.getName())
+        .isEqualTo("Frodo").isNotEqualTo("Frodon");
     // shows that we are no more limited by generics, if we had defined isEqualTo to take only the type of actual
     // (TolkienCharacter) the assertion below would not have compiled
     Object frodoAsObject = frodo;
-    assertThat(frodo).isEqualTo(frodoAsObject);
+    assertThat(frodo)
+        .isEqualTo(frodoAsObject);
   }
 
   @Test
@@ -69,28 +72,31 @@ public class BasicAssertionsExamples extends AbstractAssertionsExamples {
     // set an incorrect age to Mr Frodo, just to see how nice is the assertion error message
     frodo.setAge(50);
     // you can specify a test description with as() method or describedAs(), it supports String format args
-    Throwable error = catchThrowable(() -> assertThat(frodo.age).as("check %s's age", frodo.getName()).isEqualTo(33));
-    assertThat(error).isInstanceOf(AssertionError.class)
-                     .hasMessage(format("[check Frodo's age] %n" +
-                                        "expected: 33%n" +
-                                        "but was : 50"));
+    Throwable error = catchThrowable(() -> assertThat(frodo.age).as("check %s's age", frodo.getName())
+        .isEqualTo(33));
+    assertThat(error)
+        .isInstanceOf(AssertionError.class)
+        .hasMessage(format("[check Frodo's age] %n" +
+            "expected: 33%n" +
+            "but was : 50"));
 
     // you can pass a Supplier<String> to avoid building the description if the assertion succeeds
-    assertThat(frodo.age).as(() -> "check Frodo's age").isEqualTo(50);
+    assertThat(frodo.age)
+        .as(() -> "check Frodo's age").isEqualTo(50);
 
     // but you still can override the error message if you have a better one:
     final String frodon = "Frodon";
     try {
       assertThat(frodo.getName()).as("check Frodo's name")
-                                 .overridingErrorMessage("Hey my name is Frodo not %s", frodon)
-                                 .isEqualTo(frodon);
+          .overridingErrorMessage("Hey my name is Frodo not %s", frodon)
+          .isEqualTo(frodon);
     } catch (AssertionError e) {
       assertThat(e).hasMessage("[check Frodo's name] Hey my name is Frodo not Frodon");
     }
     // withFailMessage is another way to override the error message:
     try {
       assertThat(frodo.getName()).withFailMessage("Hey my name is Frodo not (%)")
-                                 .isEqualTo(frodon);
+          .isEqualTo(frodon);
     } catch (AssertionError e) {
       assertThat(e).hasMessage("Hey my name is Frodo not (%)");
     }
@@ -99,7 +105,7 @@ public class BasicAssertionsExamples extends AbstractAssertionsExamples {
     // taking a supplier which is only resolved if an AssertionError is raised.
     try {
       assertThat(frodo.getName()).withFailMessage(() -> "Hey my name is Frodo not (%)")
-                                 .isEqualTo(frodon);
+          .isEqualTo(frodon);
     } catch (AssertionError e) {
       assertThat(e).hasMessage("Hey my name is Frodo not (%)");
     }
@@ -191,17 +197,17 @@ public class BasicAssertionsExamples extends AbstractAssertionsExamples {
   @Test
   public void extracting_object_values() {
     assertThat(frodo).extracting(TolkienCharacter::getName,
-                                 character -> character.age,
-                                 character -> character.getRace().getName())
-                     .containsExactly("Frodo", 33, "Hobbit");
+        character -> character.age,
+        character -> character.getRace().getName())
+        .containsExactly("Frodo", 33, "Hobbit");
 
     assertThat(frodo).extracting("name", "age", "race.name")
-                     .containsExactly("Frodo", 33, "Hobbit");
+        .containsExactly("Frodo", 33, "Hobbit");
 
     System.out.println("FieldSupport.extraction().fieldValue(\"age\", Integer.class, frodo)"
-                       + FieldSupport.extraction().fieldValue("age", Integer.class, frodo));
+        + FieldSupport.extraction().fieldValue("age", Integer.class, frodo));
     System.out.println("FieldSupport.extraction().fieldValue(\"age\", Integer.class, frodo)"
-                       + FieldSupport.extraction().fieldValue("age", Object.class, frodo));
+        + FieldSupport.extraction().fieldValue("age", Object.class, frodo));
   }
 
   @Test
@@ -231,16 +237,16 @@ public class BasicAssertionsExamples extends AbstractAssertionsExamples {
   @Test
   public void extracting_field_or_property_examples() {
     assertThat(frodo).extracting("name", "age", "race.name")
-                     .containsExactly("Frodo", 33, "Hobbit");
+        .containsExactly("Frodo", 33, "Hobbit");
 
     assertThat(frodo).extracting("name", "age", "race.name")
-                     .usingComparatorForType(caseInsensitiveStringComparator, String.class)
-                     .containsExactly("FRODO", 33, "hoBBit");
+        .usingComparatorForType(caseInsensitiveStringComparator, String.class)
+        .containsExactly("FRODO", 33, "hoBBit");
 
     assertThat(frodo).extracting("name", "age", "race.name")
-                     .usingComparatorForType(caseInsensitiveStringComparator, String.class)
-                     .usingComparatorForType(absValueComparator, Integer.class)
-                     .containsExactly("FRODO", -33, "hoBBit");
+        .usingComparatorForType(caseInsensitiveStringComparator, String.class)
+        .usingComparatorForType(absValueComparator, Integer.class)
+        .containsExactly("FRODO", -33, "hoBBit");
   }
 
   @SuppressWarnings("unchecked")
@@ -292,8 +298,8 @@ public class BasicAssertionsExamples extends AbstractAssertionsExamples {
     assertThat(valueList).asInstanceOf(InstanceOfAssertFactories.list(Ring.class)).contains(nenya);
     // here we don't specify the List type so a List<Object> is used
     assertThat(valueList).as("check the elven rings")
-                         .asInstanceOf(InstanceOfAssertFactories.LIST)
-                         .contains(vilya);
+        .asInstanceOf(InstanceOfAssertFactories.LIST)
+        .contains(vilya);
   }
 
   @Test
@@ -305,7 +311,7 @@ public class BasicAssertionsExamples extends AbstractAssertionsExamples {
     animals.add(snake);
 
     assertThat(animals).usingFieldByFieldElementComparator()
-                       .containsExactly(bird, snake);
+        .containsExactly(bird, snake);
   }
 
   @Test
@@ -318,15 +324,15 @@ public class BasicAssertionsExamples extends AbstractAssertionsExamples {
     // THEN
     assertThat(joe).matches(p -> p.getName().equals("Joe") && p.getHeight().compareTo(new BigDecimal("1.8")) == 0);
     assertThat(joe).extracting("name", "height")
-                   .usingComparatorForElementFieldsWithType(new BigDecimalComparator(), BigDecimal.class)
-                   .containsExactly("Joe", new BigDecimal("1.8"));
+        .usingComparatorForElementFieldsWithType(new BigDecimalComparator(), BigDecimal.class)
+        .containsExactly("Joe", new BigDecimal("1.8"));
 
   }
 
   @Test
   public void toString_assertions_examples() {
     assertThat(frodo).hasToString("Frodo 33 years old Hobbit")
-                     .doesNotHaveToString("Sauron the maia");
+        .doesNotHaveToString("Sauron the maia");
   }
 
   private class Animal {
@@ -369,4 +375,5 @@ public class BasicAssertionsExamples extends AbstractAssertionsExamples {
       return length;
     }
   }
+
 }
