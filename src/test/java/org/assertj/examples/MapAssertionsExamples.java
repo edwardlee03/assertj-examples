@@ -23,6 +23,7 @@ import org.junit.Test;
 
 /**
  * Map assertions example.
+ * 映射关系的断言示例。
  *
  * @author Joel Costigliola
  */
@@ -31,29 +32,39 @@ public class MapAssertionsExamples extends AbstractAssertionsExamples {
   @Test
   public void map_assertions_examples() {
     // ringBearers is a Map of TolkienCharacter indexed by the Ring they are wearing.
-    assertThat(ringBearers).isNotEmpty().hasSize(4);
+    assertThat(ringBearers)
+        .isNotEmpty().hasSize(4);
     
     // note the usage of Assertions.entry(key, value) synthetic sugar for better readability (similar to MapEntry.entry(key, value)). 
-    assertThat(ringBearers).contains(entry(oneRing, frodo), entry(nenya, galadriel));
+    assertThat(ringBearers)
+        .contains(entry(oneRing, frodo), entry(nenya, galadriel));
     // same assertion but different way of expressing it : no entry call needed but no varargs support. 
-    assertThat(ringBearers).containsEntry(oneRing, frodo).containsEntry(nenya, galadriel);
+    assertThat(ringBearers)
+        .containsEntry(oneRing, frodo)
+        .containsEntry(nenya, galadriel);
     // opposite of contains/containsEntry
-    assertThat(ringBearers).doesNotContain(entry(oneRing, aragorn));
-    assertThat(ringBearers).doesNotContainEntry(oneRing, aragorn);
+    assertThat(ringBearers)
+        .doesNotContain(entry(oneRing, aragorn));
+    assertThat(ringBearers)
+        .doesNotContainEntry(oneRing, aragorn);
     
     // Assertion on key
-    assertThat(ringBearers).containsKey(nenya);
-    assertThat(ringBearers).containsKeys(nenya, narya);
-    assertThat(ringBearers).doesNotContainKey(manRing);
+    assertThat(ringBearers)
+        .containsKey(nenya);
+    assertThat(ringBearers)
+        .containsKeys(nenya, narya);
+    assertThat(ringBearers)
+        .doesNotContainKey(manRing);
     
     // Assertion on value
-    assertThat(ringBearers).containsValue(frodo);
-    assertThat(ringBearers).doesNotContainValue(sam);
+    assertThat(ringBearers)
+        .containsValue(frodo);
+    assertThat(ringBearers)
+        .doesNotContainValue(sam);
     
     ringBearers.clear();
     assertThat(ringBearers).isEmpty();
     assertThat(ringBearers).contains();
   }
-  
   
 }
