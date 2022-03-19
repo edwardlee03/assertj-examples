@@ -19,18 +19,22 @@ import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * 用于遍历和划分源元素的对象的断言示例。
+ */
 public class SpliteratorExamples {
 
   @Test
   public void spliterator_examples() {
-    Spliterator<Integer> spliterator = Stream.of(1, 2, 3).spliterator();
+    Spliterator<Integer> spliterator = Stream.of(1, 2, 3)
+        .spliterator();
 
-    assertThat(spliterator).hasCharacteristics(Spliterator.SIZED,
-                                               Spliterator.ORDERED)
-                           .hasOnlyCharacteristics(Spliterator.SIZED,
-                                                   Spliterator.SUBSIZED,
-                                                   Spliterator.IMMUTABLE,
-                                                   Spliterator.ORDERED);
+    assertThat(spliterator)
+        .hasCharacteristics(Spliterator.SIZED, Spliterator.ORDERED)
+        .hasOnlyCharacteristics(Spliterator.SIZED,
+            Spliterator.SUBSIZED,
+            Spliterator.IMMUTABLE,
+            Spliterator.ORDERED);
   }
 
 }
