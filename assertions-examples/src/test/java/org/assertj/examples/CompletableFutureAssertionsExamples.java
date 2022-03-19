@@ -1,13 +1,13 @@
 /**
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
- *
+ * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
- *
+ * <p>
  * Copyright 2012-2016 the original author or authors.
  */
 package org.assertj.examples;
@@ -36,42 +36,50 @@ public class CompletableFutureAssertionsExamples extends AbstractAssertionsExamp
   public void completableFuture_assertions_examples() {
 
     CompletableFuture<String> completedFuture = completedFuture("something");
-    assertThat(completedFuture).isCompleted()
-                               .isCompletedWithValue("something")
-                               .isCompletedWithValueMatching(result -> result.startsWith("some"))
-                               .isCompletedWithValueMatching(result -> result.startsWith("some"), "error message")
-                               .isDone();
+    assertThat(completedFuture)
+        .isCompleted()
+        .isCompletedWithValue("something")
+        .isCompletedWithValueMatching(result -> result.startsWith("some"))
+        .isCompletedWithValueMatching(result -> result.startsWith("some"), "error message")
+        .isDone();
 
     CompletableFuture<?> futureExplosion = new CompletableFuture<>();
     futureExplosion.completeExceptionally(new RuntimeException("boom !"));
-    assertThat(futureExplosion).isCompletedExceptionally()
-                               .isDone();
+    assertThat(futureExplosion)
+        .isCompletedExceptionally()
+        .isDone();
 
-    assertThat(futureExplosion).isCompletedExceptionally()
-                               .isNotCancelled()
-                               .failsWithin(10, TimeUnit.MILLISECONDS)
-                               .withThrowableOfType(ExecutionException.class)
-                               .withCauseInstanceOf(RuntimeException.class)
-                               .withMessageContaining("boom !");
+    assertThat(futureExplosion)
+        .isCompletedExceptionally()
+        .isNotCancelled()
+        .failsWithin(10, TimeUnit.MILLISECONDS)
+        .withThrowableOfType(ExecutionException.class)
+        .withCauseInstanceOf(RuntimeException.class)
+        .withMessageContaining("boom !");
 
     CompletableFuture<?> cancelledFuture = new CompletableFuture<>();
     cancelledFuture.cancel(true);
-    assertThat(cancelledFuture).isCancelled()
-                               .isDone()
-                               .isCompletedExceptionally();
+    assertThat(cancelledFuture)
+        .isCancelled()
+        .isDone()
+        .isCompletedExceptionally();
 
     CompletableFuture<String> future = completedFuture("ook!");
     // assertion expressed with TimeUnit
-    assertThat(future).succeedsWithin(100, TimeUnit.MILLISECONDS)
-                      .isEqualTo("ook!");
+    assertThat(future)
+        .succeedsWithin(100, TimeUnit.MILLISECONDS)
+        .isEqualTo("ook!");
     // strongly typed assertion
-    assertThat(future).succeedsWithin(100, TimeUnit.MILLISECONDS, as(STRING))
-                      .startsWith("oo");
+    assertThat(future)
+        .succeedsWithin(100, TimeUnit.MILLISECONDS, as(STRING))
+        .startsWith("oo");
     // same assertions with Duration
-    assertThat(future).succeedsWithin(Duration.ofMillis(100))
-                      .isEqualTo("ook!");
-    assertThat(future).succeedsWithin(Duration.ofMillis(100), as(STRING))
-                      .startsWith("oo");
+    assertThat(future)
+        .succeedsWithin(Duration.ofMillis(100))
+        .isEqualTo("ook!");
+    assertThat(future)
+        .succeedsWithin(Duration.ofMillis(100), as(STRING))
+        .startsWith("oo");
 
     // log some error messages to have a look at them
     try {
@@ -81,7 +89,7 @@ public class CompletableFutureAssertionsExamples extends AbstractAssertionsExamp
     }
     try {
       assertThat(completedFuture).isCompletedExceptionally()
-                                 .isNotCancelled();
+          .isNotCancelled();
     } catch (AssertionError e) {
       logAssertionErrorMessage("CompletableFutureAssert.hasFailed", e);
     }
@@ -90,9 +98,10 @@ public class CompletableFutureAssertionsExamples extends AbstractAssertionsExamp
   @Test
   public void completionStage_assertions_examples() {
     CompletionStage<String> actual = completedFuture("done");
-    assertThat(actual).isDone()
-                      .isNotCancelled()
-                      .isNotCompletedExceptionally();
+    assertThat(actual)
+        .isDone()
+        .isNotCancelled()
+        .isNotCompletedExceptionally();
   }
 
 }
