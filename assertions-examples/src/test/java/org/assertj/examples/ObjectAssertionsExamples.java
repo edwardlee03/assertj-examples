@@ -1,13 +1,13 @@
 /**
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
- *
+ * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
- *
+ * <p>
  * Copyright 2012-2016 the original author or authors.
  */
 package org.assertj.examples;
@@ -35,34 +35,42 @@ public class ObjectAssertionsExamples extends AbstractAssertionsExamples {
   @Test
   public void object_extracting_example() {
     // single value extracted
-    assertThat(frodo).extracting(TolkienCharacter::getName)
-                     .isEqualTo("Frodo");
-    assertThat(frodo).extracting("name")
-                     .isEqualTo("Frodo");
-    assertThat(frodo).extracting("name")
-                     .asInstanceOf(STRING)
-                     .startsWith("Fro");
+    assertThat(frodo)
+        .extracting(TolkienCharacter::getName)
+        .isEqualTo("Frodo");
+    assertThat(frodo)
+        .extracting("name")
+        .isEqualTo("Frodo");
+    assertThat(frodo)
+        .extracting("name")
+        .asInstanceOf(STRING)
+        .startsWith("Fro");
 
     // multiple values extracted
-    assertThat(frodo).extracting(TolkienCharacter::getName, TolkienCharacter::getRace)
-                     .containsExactly("Frodo", HOBBIT);
+    assertThat(frodo)
+        .extracting(TolkienCharacter::getName, TolkienCharacter::getRace)
+        .containsExactly("Frodo", HOBBIT);
 
     // To get String assertions use asInstanceOf:
-    assertThat(frodo).extracting("name")
-                     .asInstanceOf(STRING)
-                     .startsWith("Fro");
+    assertThat(frodo)
+        .extracting("name")
+        .asInstanceOf(STRING)
+        .startsWith("Fro");
     // To get String assertions use asInstanceOf with as syntactic sugar:
-    assertThat(frodo).extracting("name")
-                     .asInstanceOf(as(STRING))
-                     .startsWith("Fro");
+    assertThat(frodo)
+        .extracting("name")
+        .asInstanceOf(as(STRING))
+        .startsWith("Fro");
     // shorter version of the above assertions:
-    assertThat(frodo).extracting("name", as(STRING))
-                     .startsWith("Fro");
+    assertThat(frodo)
+        .extracting("name", as(STRING))
+        .startsWith("Fro");
 
     // extracting propagates the type parameter of the extracted value
-    assertThat(frodo).extracting(TolkienCharacter::getName)
-                     .extracting(String::length)
-                     .isEqualTo(5);
+    assertThat(frodo)
+        .extracting(TolkienCharacter::getName)
+        .extracting(String::length)
+        .isEqualTo(5);
   }
 
   @Test
@@ -78,20 +86,23 @@ public class ObjectAssertionsExamples extends AbstractAssertionsExamples {
     // already available in InstanceOfAssertFactories!
 
     // With asInstanceOf, we switch to specific String assertion by specifying the InstanceOfAssertFactory for String
-    assertThat(value).asInstanceOf(STRING).startsWith("Once");
+    assertThat(value)
+        .asInstanceOf(STRING).startsWith("Once");
   }
 
   @Test
   public void returns_assertion() {
-    assertThat(frodo).returns("Frodo", from(TolkienCharacter::getName))
-                     .returns(HOBBIT, from(TolkienCharacter::getRace))
-                     .returns(HOBBIT, TolkienCharacter::getRace);
+    assertThat(frodo)
+        .returns("Frodo", from(TolkienCharacter::getName))
+        .returns(HOBBIT, from(TolkienCharacter::getRace))
+        .returns(HOBBIT, TolkienCharacter::getRace);
   }
 
   @Test
   public void should_not_produce_warning_for_varargs_parameter() {
-    assertThat(entry(oneRing, frodo)).extracting(entry -> entry.key, entry -> entry.value)
-                                     .containsExactly(oneRing, frodo);
+    assertThat(entry(oneRing, frodo))
+        .extracting(entry -> entry.key, entry -> entry.value)
+        .containsExactly(oneRing, frodo);
   }
 
   @Test
@@ -99,9 +110,12 @@ public class ObjectAssertionsExamples extends AbstractAssertionsExamples {
     BigDecimal value1 = BigDecimal.valueOf(100);
     BigDecimal value2 = value1.setScale(2);
 
-    assertThat(value1).isNotEqualTo(value2);
-    assertThat(value1.hashCode()).isNotEqualTo(value2.hashCode());
-    assertThat(value1).isEqualByComparingTo(value2);
+    assertThat(value1)
+        .isNotEqualTo(value2);
+    assertThat(value1.hashCode())
+        .isNotEqualTo(value2.hashCode());
+    assertThat(value1)
+        .isEqualByComparingTo(value2);
 
     class Foo {
       private final BigDecimal value;
@@ -132,13 +146,15 @@ public class ObjectAssertionsExamples extends AbstractAssertionsExamples {
     Foo foo1 = new Foo(value1);
     Foo foo2 = new Foo(value2);
 
-    assertThat(foo1).usingRecursiveComparison()
-                    .withComparatorForType(BIG_DECIMAL_COMPARATOR, BigDecimal.class)
-                    .isEqualTo(foo2);
+    assertThat(foo1)
+        .usingRecursiveComparison()
+        .withComparatorForType(BIG_DECIMAL_COMPARATOR, BigDecimal.class)
+        .isEqualTo(foo2);
 
-    assertThat(new Bar(singleton(foo1))).usingRecursiveComparison()
-                                        .withComparatorForType(BIG_DECIMAL_COMPARATOR, BigDecimal.class)
-                                        .isEqualTo(new Bar(singleton(foo2)));
+    assertThat(new Bar(singleton(foo1)))
+        .usingRecursiveComparison()
+        .withComparatorForType(BIG_DECIMAL_COMPARATOR, BigDecimal.class)
+        .isEqualTo(new Bar(singleton(foo2)));
   }
 
 }
