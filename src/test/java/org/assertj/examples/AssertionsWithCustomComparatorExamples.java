@@ -24,14 +24,17 @@ import org.assertj.examples.comparator.AbsValueComparator;
 import org.assertj.examples.data.TolkienCharacter;
 import org.junit.Test;
 
-
 /**
  * Examples of assertions using a specific comparator.
+ * 使用特定比较器的断言示例。
  * 
  * @author Joel Costigliola
  */
 public class AssertionsWithCustomComparatorExamples extends AbstractAssertionsExamples {
 
+  /**
+   * 字符串断言示例。
+   */
   @Test
   public void string_assertions_with_custom_comparison_examples() {
 
@@ -40,120 +43,163 @@ public class AssertionsWithCustomComparatorExamples extends AbstractAssertionsEx
 
     // now let's use a specific comparison strategy that is case iNsenSiTIve :o)
     // We see that assertions succeeds even though case is not the same (that's the point)
-    assertThat("Frodo").usingComparator(caseInsensitiveStringComparator).startsWith("fr").endsWith("ODO");
+    assertThat("Frodo").usingComparator(caseInsensitiveStringComparator)
+        .startsWith("fr").endsWith("ODO");
 
     // All assertions called after usingComparator(caseInsensitiveStringComparator) are based on the given comparator
     // ...
-    assertThat("Frodo").usingComparator(caseInsensitiveStringComparator).contains("fro").doesNotContain("don");
+    assertThat("Frodo").usingComparator(caseInsensitiveStringComparator)
+        .contains("fro").doesNotContain("don");
     // ... but a new assertion is not
     // assertThat("Frodo").startsWith("fr").endsWith("ODO"); // FAILS !!!
   }
 
+  /**
+   * 相等断言示例。
+   */
   @Test
   public void equals_assertions_with_custom_comparator_examples() {
 
     // standard comparison : frodo is not equal to sam ...
     assertThat(frodo).isNotEqualTo(sam);
     // ... but if we compare only character's race frodo is equal to sam
-    assertThat(frodo).usingComparator(raceNameComparator).isEqualTo(sam).isEqualTo(merry).isEqualTo(pippin);
+    assertThat(frodo).usingComparator(raceNameComparator)
+        .isEqualTo(sam).isEqualTo(merry).isEqualTo(pippin);
 
     // isIn assertion should be consistent with raceComparator :
-    assertThat(frodo).usingComparator(raceNameComparator).isIn(sam, merry, pippin);
+    assertThat(frodo).usingComparator(raceNameComparator)
+        .isIn(sam, merry, pippin);
 
     // chained assertions use the specified comparator, we thus can write
-    assertThat(frodo).usingComparator(raceNameComparator).isEqualTo(sam).isIn(merry, pippin);
+    assertThat(frodo).usingComparator(raceNameComparator)
+        .isEqualTo(sam).isIn(merry, pippin);
 
     // note that error message mentions the comparator used to understand the failure better.
     try {
-      assertThat(frodo).usingComparator(raceNameComparator).isEqualTo(sauron);
+      assertThat(frodo).usingComparator(raceNameComparator)
+          .isEqualTo(sauron);
     } catch (AssertionError e) {
       logAssertionErrorMessage("isEqualTo with custom comparator", e);
     }
 
     // custom comparison by race : frodo IS equal to sam => isNotEqual must fail
     try {
-      assertThat(frodo).usingComparator(raceNameComparator).isNotEqualTo(sam);
+      assertThat(frodo).usingComparator(raceNameComparator)
+          .isNotEqualTo(sam);
     } catch (AssertionError e) {
       logAssertionErrorMessage("isNotEqualTo with custom comparator", e);
     }
   }
 
+  /**
+   * 集合断言示例。
+   */
   @Test
   public void collection_assertions_with_custom_comparator_examples() {
 
     // standard comparison : the fellowshipOfTheRing includes Gandalf but not Sauron ...
     assertThat(fellowshipOfTheRing).contains(gandalf).doesNotContain(sauron);
     // ... but if we compare only race name Sauron is in fellowshipOfTheRing because he's a Maia like Gandalf.
-    assertThat(fellowshipOfTheRing).usingElementComparator(raceNameComparator).contains(sauron);
+    assertThat(fellowshipOfTheRing).usingElementComparator(raceNameComparator)
+        .contains(sauron);
 
     // note that error message mentions the comparator used to better understand the failure
     // the message indicates that Sauron were found because he is a Maia like Gandalf.
     try {
-      assertThat(newArrayList(gandalf)).usingElementComparator(raceNameComparator).doesNotContain(sauron);
+      assertThat(newArrayList(gandalf)).usingElementComparator(raceNameComparator)
+          .doesNotContain(sauron);
     } catch (AssertionError e) {
       logAssertionErrorMessage("doesNotContain with custom element comparator", e);
     }
 
     // duplicates assertion honors custom comparator
     assertThat(fellowshipOfTheRing).doesNotHaveDuplicates();
-    assertThat(newArrayList(sam, gandalf)).usingElementComparator(raceNameComparator).doesNotHaveDuplicates();
+    assertThat(newArrayList(sam, gandalf)).usingElementComparator(raceNameComparator)
+        .doesNotHaveDuplicates();
     try {
-      assertThat(newArrayList(sam, gandalf, frodo)).usingElementComparator(raceNameComparator).doesNotHaveDuplicates();
+      assertThat(newArrayList(sam, gandalf, frodo)).usingElementComparator(raceNameComparator)
+          .doesNotHaveDuplicates();
     } catch (AssertionError e) {
       logAssertionErrorMessage("doesNotHaveDuplicates with custom element comparator", e);
     }
   }
 
+  /**
+   * 数组断言示例。
+   */
   @Test
   public void array_assertions_with_custom_comparison_examples() {
+
     TolkienCharacter[] fellowshipOfTheRingCharacters = fellowshipOfTheRing.toArray(new TolkienCharacter[0]);
 
     // standard comparison : the fellowshipOfTheRing includes Gandalf but not Sauron ...
-    assertThat(fellowshipOfTheRingCharacters).contains(gandalf).doesNotContain(sauron);
+    assertThat(fellowshipOfTheRingCharacters).contains(gandalf)
+        .doesNotContain(sauron);
     // ... but if we compare only race name Sauron is in fellowshipOfTheRing because he's a Maia like Gandalf.
-    assertThat(fellowshipOfTheRingCharacters).usingElementComparator(raceNameComparator).contains(sauron);
+    assertThat(fellowshipOfTheRingCharacters).usingElementComparator(raceNameComparator)
+        .contains(sauron);
 
     // isSorted assertion honors custom comparator
-    assertThat(array(sam, gandalf)).isSortedAccordingTo(ageComparator);
-    assertThat(array(sam, gandalf)).usingElementComparator(ageComparator).isSorted();
+    assertThat(array(sam, gandalf))
+        .isSortedAccordingTo(ageComparator);
+    assertThat(array(sam, gandalf)).usingElementComparator(ageComparator)
+        .isSorted();
 
     // note that error message mentions the comparator used to better understand the failure
     try {
-      assertThat(array(gandalf, sam)).usingElementComparator(ageComparator).isSorted();
+      assertThat(array(gandalf, sam)).usingElementComparator(ageComparator)
+          .isSorted();
     } catch (AssertionError e) {
       logAssertionErrorMessage("isSorted with custom element comparator", e);
     }
 
     // duplicates assertion honors custom comparator :
     assertThat(fellowshipOfTheRingCharacters).doesNotHaveDuplicates();
-    assertThat(array(sam, gandalf)).usingElementComparator(raceNameComparator).doesNotHaveDuplicates();
+    assertThat(array(sam, gandalf)).usingElementComparator(raceNameComparator)
+        .doesNotHaveDuplicates();
     try {
-      assertThat(array(sam, gandalf, frodo)).usingElementComparator(raceNameComparator).doesNotHaveDuplicates();
+      assertThat(array(sam, gandalf, frodo)).usingElementComparator(raceNameComparator)
+          .doesNotHaveDuplicates();
     } catch (AssertionError e) {
       logAssertionErrorMessage("doesNotHaveDuplicates with custom element comparator", e);
     }
   }
 
+  /**
+   * 数字断言示例。
+   */
   @Test
   public void number_assertions_with_custom_comparison_examples() {
 
     // with absolute values comparator : |-8| == |8|
-    assertThat(-8).usingComparator(absValueComparator).isEqualTo(8);
-    assertThat(-8.0).usingComparator(new AbsValueComparator<Double>()).isEqualTo(8.0);
-    assertThat((byte) -8).usingComparator(new AbsValueComparator<Byte>()).isEqualTo((byte) 8);
-    assertThat(new BigDecimal("-8")).usingComparator(new AbsValueComparator<BigDecimal>()).isEqualTo(
-        new BigDecimal("8"));
+    assertThat(-8).usingComparator(absValueComparator)
+        .isEqualTo(8);
+    assertThat(-8.0).usingComparator(new AbsValueComparator<Double>())
+        .isEqualTo(8.0);
+    assertThat((byte) -8).usingComparator(new AbsValueComparator<Byte>())
+        .isEqualTo((byte) 8);
+    assertThat(new BigDecimal("-8")).usingComparator(new AbsValueComparator<BigDecimal>())
+        .isEqualTo(new BigDecimal("8"));
 
     // works with arrays !
-    assertThat(new int[] { -1, 2, 3 }).usingElementComparator(absValueComparator).contains(1, 2, -3);
+    assertThat(new int[] { -1, 2, 3 }).usingElementComparator(absValueComparator)
+        .contains(1, 2, -3);
   }
 
+  /**
+   * 字符断言示例。
+   */
   @Test
   public void char_assertions_with_custom_comparison_examples() {
-    assertThat('a').usingComparator(caseInsensitiveComparator).isEqualTo('A');
-    assertThat(new Character('a')).usingComparator(caseInsensitiveComparator).isEqualTo(new Character('A'));
+    assertThat('a').usingComparator(caseInsensitiveComparator)
+        .isEqualTo('A');
+    assertThat(new Character('a')).usingComparator(caseInsensitiveComparator)
+        .isEqualTo(new Character('A'));
   }
 
+  /**
+   * 日期断言示例。
+   */
   @Test
   public void date_assertions_with_custom_comparison_examples() {
 
@@ -168,7 +214,8 @@ public class AssertionsWithCustomComparatorExamples extends AbstractAssertionsEx
 
     // build date away from today by one day (if we are at the end of the month we subtract one day, otherwise we add one)
     Date oneDayFromTodayInSameMonth = monthOf(tomorrow()) == monthOf(new Date()) ? tomorrow() : yesterday();
-    assertThat(oneDayFromTodayInSameMonth).usingComparator(yearAndMonthComparator).isToday();
+    assertThat(oneDayFromTodayInSameMonth).usingComparator(yearAndMonthComparator)
+        .isToday();
   }
 
 }
