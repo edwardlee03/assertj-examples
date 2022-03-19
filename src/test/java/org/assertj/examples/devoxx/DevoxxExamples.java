@@ -12,7 +12,6 @@
  */
 package org.assertj.examples.devoxx;
 
-// import static org.assertj.examples.devoxx.DevoxxCustomAssertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.entry;
 import static org.assertj.core.api.Assertions.extractProperty;
@@ -36,7 +35,7 @@ import org.assertj.examples.data.Ring;
 import org.junit.Before;
 import org.junit.Test;
 
-public class DevoxxDemo extends AbstractAssertionsExamples {
+public class DevoxxExamples extends AbstractAssertionsExamples {
 
   private List<Ring> elvesRings;
 
@@ -47,12 +46,15 @@ public class DevoxxDemo extends AbstractAssertionsExamples {
     elvesRings = newArrayList(vilya, nenya, narya);
   }
 
+  /**
+   * 常见的断言示例。
+   */
   @Test
   public void common_assertions_examples() {
 
     assertThat("Test").containsIgnoringCase("test");
 
-    // the most simple assertion
+    // the most simple assertion - 最简单的断言
     assertThat(frodo.age).isEqualTo(33);
     assertThat(frodo.getName()).isEqualTo("Frodo").isNotEqualTo("Frodon");
 
@@ -61,6 +63,9 @@ public class DevoxxDemo extends AbstractAssertionsExamples {
     assertThat(sauron).isNotIn(fellowshipOfTheRing);
   }
 
+  /**
+   * 字符串的断言示例。
+   */
   @Test
   public void string_assertions_examples() {
 
@@ -75,18 +80,24 @@ public class DevoxxDemo extends AbstractAssertionsExamples {
     assertThat("Frodo").matches("..o.o").doesNotMatch(".*d");
   }
 
+  /**
+   * 迭代器的断言示例。
+   */
   @Test
   public void iterable_assertions_examples() {
 
-    assertThat(elvesRings).isNotEmpty()
-                          .hasSize(3)
-                          .contains(nenya)
-                          .doesNotContain(oneRing);
+    // 流式API
+    assertThat(elvesRings)
+        .isNotEmpty()
+        .hasSize(3)
+        .contains(nenya)
+        .doesNotContain(oneRing);
 
     // with containsOnly, all the elements must be present (but the order is not important)
-    assertThat(elvesRings).containsOnly(nenya, vilya, narya)
-                          .doesNotContainNull()
-                          .doesNotHaveDuplicates();
+    assertThat(elvesRings)
+        .containsOnly(nenya, vilya, narya)
+        .doesNotContainNull()
+        .doesNotHaveDuplicates();
 
     // you can also check the start or end of your collection/iterable
     Iterable<Ring> allRings = newArrayList(oneRing, vilya, nenya, narya, dwarfRing, manRing);
@@ -103,18 +114,24 @@ public class DevoxxDemo extends AbstractAssertionsExamples {
   public void iterable_assertions_on_extracted_property_values_example() {
 
     // extract simple property values having a java standard type
-    assertThat(extractProperty("name").from(fellowshipOfTheRing)).contains("Frodo", "Gandalf", "Legolas")
-                                                                 .doesNotContain("Sauron", "Elrond");
+    assertThat(extractProperty("name").from(fellowshipOfTheRing))
+        .contains("Frodo", "Gandalf", "Legolas")
+        .doesNotContain("Sauron", "Elrond");
 
     // extracting property works also with user's types (here Race)
-    assertThat(extractProperty("race").from(fellowshipOfTheRing)).contains(HOBBIT, ELF)
-                                                                 .doesNotContain(ORC);
+    assertThat(extractProperty("race").from(fellowshipOfTheRing))
+        .contains(HOBBIT, ELF)
+        .doesNotContain(ORC);
 
     // extract nested property on Race
-    assertThat(extractProperty("race.name").from(fellowshipOfTheRing)).contains("Hobbit", "Elf")
-                                                                      .doesNotContain("Orc");
+    assertThat(extractProperty("race.name").from(fellowshipOfTheRing))
+        .contains("Hobbit", "Elf")
+        .doesNotContain("Orc");
   }
 
+  /**
+   * 异常的断言示例。
+   */
   @Test
   public void exceptions_assertions_examples() {
     assertThat(elvesRings).hasSize(3);
@@ -123,35 +140,41 @@ public class DevoxxDemo extends AbstractAssertionsExamples {
     } catch (Exception e) {
       // you can check exception type
       assertThat(e).isInstanceOf(IndexOutOfBoundsException.class)
-                   .hasNoCause()
-                   .hasMessage("Index: 9, Size: 3")
-                   .hasMessageStartingWith("Index: 9")
-                   .hasMessageContaining("9")
-                   .hasMessageEndingWith("Size: 3");
+          .hasNoCause()
+          .hasMessage("Index: 9, Size: 3")
+          .hasMessageStartingWith("Index: 9")
+          .hasMessageContaining("9")
+          .hasMessageEndingWith("Size: 3");
     }
   }
 
+  /**
+   * 映射表的断言示例。
+   */
   @Test
   public void map_assertions_examples() {
     // ringBearers is a Map of Ring -> TolkienCharacter who has the ring.
     assertThat(ringBearers).isNotEmpty()
-                           .hasSize(4)
-                           .contains(entry(oneRing, frodo), entry(nenya, galadriel))
-                           .doesNotContain(entry(oneRing, aragorn))
-                           .containsKey(Ring.nenya)
-                           .containsValue(frodo)
-                           .doesNotContainValue(sam);
+        .hasSize(4)
+        .contains(entry(oneRing, frodo), entry(nenya, galadriel))
+        .doesNotContain(entry(oneRing, aragorn))
+        .containsKey(Ring.nenya)
+        .containsValue(frodo)
+        .doesNotContainValue(sam);
   }
 
+  /**
+   * 日期的断言示例。
+   */
   @Test
   public void basic_date_assertions_examples() {
 
     // theTwoTowers was released the 18th december of year 2002
     Date theTwoTowersReleaseDate = theTwoTowers.getReleaseDate();
     assertThat(theTwoTowersReleaseDate).isEqualTo(parse("2002-12-18"))
-                                       .isEqualTo("2002-12-18")
-                                       .isAfter(theFellowshipOfTheRing.getReleaseDate())
-                                       .isBefore(theReturnOfTheKing.getReleaseDate());
+        .isEqualTo("2002-12-18")
+        .isAfter(theFellowshipOfTheRing.getReleaseDate())
+        .isBefore(theReturnOfTheKing.getReleaseDate());
   }
 
   @Test
@@ -162,4 +185,5 @@ public class DevoxxDemo extends AbstractAssertionsExamples {
 
     // write assertion playsInSameTeamAs(player)
   }
+
 }
