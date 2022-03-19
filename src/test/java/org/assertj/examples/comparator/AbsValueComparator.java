@@ -16,8 +16,12 @@ import static java.lang.Math.abs;
 
 import java.util.Comparator;
 
+/**
+ * 绝对数值比较器。
+ */
 public class AbsValueComparator<NUMBER extends Number> implements Comparator<NUMBER> {
 
+  @Override
   public int compare(NUMBER i1, NUMBER i2) {
     double diff = abs(i1.doubleValue()) - abs(i2.doubleValue());
     if (diff == 0.0) return 0;

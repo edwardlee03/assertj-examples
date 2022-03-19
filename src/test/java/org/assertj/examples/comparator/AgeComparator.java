@@ -16,16 +16,17 @@ import java.util.Comparator;
 
 import org.assertj.examples.data.TolkienCharacter;
 
-
 /**
  * Compare {@link TolkienCharacter} age.
+ * 年龄比较器。
  *
  * @author Joel Costigliola 
  */
 public class AgeComparator implements Comparator<TolkienCharacter> {
+
+  @Override
   public int compare(TolkienCharacter tolkienCharacter1, TolkienCharacter tolkienCharacter2) {
     Integer age1 = tolkienCharacter1.age;
     return age1.compareTo(tolkienCharacter2.age);
   }
-
 }

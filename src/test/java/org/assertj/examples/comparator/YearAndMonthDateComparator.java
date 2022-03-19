@@ -17,11 +17,14 @@ import static org.assertj.core.util.Dates.*;
 import java.util.Comparator;
 import java.util.Date;
 
+/**
+ * 年月日期比较器。
+ */
 public class YearAndMonthDateComparator implements Comparator<Date> {
 
+  @Override
   public int compare(Date d1, Date d2) {
     int yearDifference = yearOf(d1) - yearOf(d2);
     return yearDifference != 0 ? yearDifference : monthOf(d1) - monthOf(d2);
   }
-
 }
